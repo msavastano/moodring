@@ -18,14 +18,14 @@ router.get('/friend', ctrlFriendPage.index);
 router.get('/friendlist', ctrlFriendList.index);
 
 /* GET comment new screen */
-router.get('/:moodid/comment/new', ctrlFriendList.index);
+router.get('/:moodid/comment/new', ctrlComment.index);
 /*POST new comment*/
-router.post('/:moodid/comment/new', ctrlFriendList.new_comment);
+router.post('/:moodid/comment/new', ctrlComment.new_comment);
 
 /* GET comment on comment new screen */
-router.get('/:moodid/comment/commentid/commentoncomment/:commentoncommentid', ctrlCommentOnComment.index);
+router.get('/:moodid/comment/:commentid/commentoncomment/new', ctrlCommentOnComment.index);
 /*POST new comment on comment*/
-router.post('/:moodid/comment/:commentid/commentoncomment/:commentoncommentid', ctrlCommentOnComment.new_comment_on_comment);
+router.post('/:moodid/comment/:commentid/commentoncomment/new', ctrlCommentOnComment.new_comment_on_comment);
 
 
 module.exports = router;

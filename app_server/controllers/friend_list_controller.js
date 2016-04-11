@@ -4,6 +4,7 @@ module.exports.index = function(req, res, next) {
                         message: 'Welcome to'});
 };
 
-module.exports.new_comment = function(req, res, next){
-    
+
+var data = {
+  
 };
