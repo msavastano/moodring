@@ -1,5 +1,8 @@
-// Homepage
+// Friend Page
 module.exports.index = function(req, res, next) {
-  res.render('index', { title: 'Express',
+  res.render('friend', { title: 'Friend\'s Page',
                         message: 'Welcome to'});
 };
+
+
+var data = {};
