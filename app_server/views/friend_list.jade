@@ -4,3 +4,11 @@ block content
   div
     h1= title
     p #{message} #{title}
+    
+    div.container
+      div
+        ul#friend_list_div
+          each name, ix in friendsmap
+            li: a(href='/friend/'+name._id)= name.username 
+              &nbsp; 
+              button(moodcolor=name.mood).btn.btn-primary.btn-sm

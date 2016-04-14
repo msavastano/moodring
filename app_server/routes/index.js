@@ -11,8 +11,11 @@ var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller
 /* GET home page. */
 router.get('/', ctrlMain.index);
 
+/* POST new mood */
+router.post('/', ctrlMain.new_mood);
+
 /* GET home page. */
-router.get('/friend', ctrlFriendPage.index);
+router.get('/friend/:userid', ctrlFriendPage.index);
 
 /* GET friend list page. */
 router.get('/friendlist', ctrlFriendList.index);

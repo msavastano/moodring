@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
+//var passportLocalMongoose = require('passport-local-mongoose');
 
 var commentsOnCommentsSchema = new Schema({
     commentOnComment:  {
         type: String,
+        maxlength: 144,
         required: true
     },
     postedBy: {
@@ -18,13 +19,14 @@ var commentsOnCommentsSchema = new Schema({
 var commentSchema = new Schema({
     comment:  {
         type: String,
+        maxlength: 144,
         required: true
     },
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    comments:[commentsOnCommentsSchema]
+    commentsOnComments:[commentsOnCommentsSchema]
 }, {
     timestamps: true
 });
@@ -33,20 +35,10 @@ var commentSchema = new Schema({
 var moodSchema = new Schema({
     label: {
         type: String,
-        required: true,
-        unique: true
-    },
-    description: {
-        type: String, 
-		default: '',
-        required: false
-    },
-    colorCSS: {
-        type: String,
         required: true
-    },    
+    },
     latestMood:{
-        type: Boolean
+        type: Boolean,
         required:true
     },
     comments:[commentSchema]
@@ -58,10 +50,8 @@ moodSchema.methods.getName = function() {
     return (this.label);
 };
 
-moodSchema.plugin(passportLocalMongoose);
+//moodSchema.plugin(passportLocalMongoose);
 
-var Moods = mongoose.model('Moods', moodSchema);
+var Moods = mongoose.model('Moods', moodSchema, 'moods');
 
 module.exports = Moods;
-
-
