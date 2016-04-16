@@ -1,8 +1,8 @@
 db.users.save({
-  username : "crocket",
-  password : "pass",
-  OauthId: "",
-  OauthToken: "",
+  "username" : "crocket",
+  "password" : "pass",
+  "OauthId": "",
+  "OauthToken": ""
 });
 
 db.moods.save({
@@ -10,16 +10,23 @@ db.moods.save({
   "latestMood" : "true",
   "comments":[{
     "comment": "Sounds great!",
-    "postedBy" : "570ef16bdabe53761514d4a7",
+    "postedBy" : "571026107ccc3adb0f242973",
     "commentsOnComments":[{
       "commentOnComment":"Thanks!",
-      "postedBy" : "570ef16bdabe53761514d4a7"
+      "postedBy" : "571026287ccc3adb0f242974"
 
     }]
   }]
 });
 
-// User id = "570ef16bdabe53761514d4a7"
-// Mood id = "570f06e33604d6e21653954e"
-// Comment id = "570f06e33604d6e21653954f"
-// Comment on Comment id = "570f06e33604d6e216539550"
+db.users.update(
+  {"_id":"570ef16bdabe53761514d4a7"},
+  {"moods":"570f06e33604d6e21653954e"},
+  { upsert: true }
+)
+
+// User id = "571026107ccc3adb0f242973" - crocket
+// User id  = "571026287ccc3adb0f242974" - stubs
+// Mood id = "5710270213aace17105ae078"
+// Comment id = "5710270213aace17105ae079"
+// Comment on Comment id = "5710270213aace17105ae07a"

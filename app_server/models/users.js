@@ -1,15 +1,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-//var passportLocalMongoose = require('passport-local-mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
     username: {
-      type: String,
-      required: true
+      type: String      
     },
     password: {
+      type: String
+    },
+    pic: {
       type: String,
-      required: true
+      'default': ''
     },
     OauthId: String,
     OauthToken: String,
@@ -29,10 +31,11 @@ var User = new Schema({
         type: Boolean,
         'default': false
     },
-    moods: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Moods'
-    },
+    moods:
+      [
+        {type: mongoose.Schema.Types.ObjectId,
+        ref: 'Moods'}]
+    ,
     friends:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
@@ -45,6 +48,6 @@ User.methods.getName = function() {
     return (this.firstname + ' ' + this.lastname);
 };
 
-//User.plugin(passportLocalMongoose);
+User.plugin(passportLocalMongoose);
 var Users = mongoose.model('User', User, 'users');
 module.exports = Users;
