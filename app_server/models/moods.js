@@ -39,7 +39,7 @@ var moodSchema = new Schema({
     },
     latestMood:{
         type: Boolean,
-        required:true
+        'default':true
     },
     comments:[commentSchema]
 }, {

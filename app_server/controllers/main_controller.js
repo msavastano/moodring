@@ -1,4 +1,6 @@
 var Moods = require('../models/moods');
+var Verify = require('./verify');
+var User = require('../models/users');
 
 // Homepage
 module.exports.index = function(req, res, next) {
@@ -8,17 +10,29 @@ module.exports.index = function(req, res, next) {
                     });
 };
 
-module.exports.new_mood = function(req, res, next){
-  Moods.create(req.body, function (err, mood) {
-        if (err) throw err;
-        console.log('Mood created!');
-        var id = mood._id;
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
+module.exports.addMoodToUser = function(req, res, next){
 
-        res.end('Added the mood with id: ' + id);
-    });
+};
+
+module.exports.new_mood = function(req, res, next){
+  if(req.params.userid){
+    User
+      .findById(req.params.userid, function(err, user){
+        if (err) {
+          sendJSONresponse(res, 400, err);
+        } else {
+          Moods.create(req.body, function (err, mood) {
+            if (err) throw err;
+            mood.label = req.body.label;
+            user.moods.push(mood._id);
+            user.save(function(err, user){
+              console.log('Updated');
+              res.json(user);
+            });
+          });
+        }
+      });
+  }
 };
 
 var moodMap = {

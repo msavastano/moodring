@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Verify = require('../controllers/verify');
 
 var ctrlMain = require('../controllers/main_controller');
 var ctrlFriendPage = require('../controllers/friend_controller');
@@ -9,10 +10,10 @@ var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller
 
 
 /* GET home page. */
-router.get('/', ctrlMain.index);
+router.get('/:userid', Verify.verifyOrdinaryUser, ctrlMain.index);
 
 /* POST new mood */
-router.post('/', ctrlMain.new_mood);
+router.post('/:userid', ctrlMain.new_mood);
 
 /* GET home page. */
 router.get('/friend/:userid', ctrlFriendPage.index);

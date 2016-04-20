@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var authenticate = require('./authenticate');
-//var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 require('./app_server/models/db');
 
@@ -28,20 +28,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+// passport config
+var Users = require('./app_server/models/users');
 app.use(passport.initialize());
+passport.use(new LocalStrategy(Users.authenticate()));
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
 
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-
-// passport config
-//var Users = require('./app_server/models/users');
-
-//passport.use(new LocalStrategy(Users.authenticate()));
-//passport.serializeUser(Users.serializeUser());
-//passport.deserializeUser(Users.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

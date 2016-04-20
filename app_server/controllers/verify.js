@@ -11,8 +11,8 @@ var passport = require('passport');
 
 var verifyOrdinaryUser = function (req, res, next) {
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-    console.log(req.query.token);
+    var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies['auth'];
+    console.log(req.cookies);
     // decode token
     if (token) {
         // verifies secret and checks exp
