@@ -10,10 +10,10 @@ var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller
 
 
 /* GET home page. */
-router.get('/:userid', Verify.verifyOrdinaryUser, ctrlMain.index);
+router.get('/', Verify.verifyOrdinaryUser, ctrlMain.index);
 
 /* POST new mood */
-router.post('/:userid', ctrlMain.new_mood);
+router.post('/', Verify.verifyOrdinaryUser, ctrlMain.new_mood);
 
 /* GET home page. */
 router.get('/friend/:userid', ctrlFriendPage.index);

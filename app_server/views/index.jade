@@ -4,14 +4,25 @@ block content
   div
     h1= title
     p #{message} #{title}
+    p #{user}
+    <!--p #{response_userid}
+    p Request #{req}
+    p ResponseDoodle #{res}-->
+  
+    
     
     div.container
       div
-        .input-prepend.input-append
-          .btn-group
-            ul.nav.pull-left: .dropdown
-              button.btn.btn-primary.dropdown-toggle( data-toggle="dropdown") 
-                span.caret
-              ul.dropdown-menu#moodChooser
-                each name, ix in moodMap
-                  li: a(href='#', hex=name.colorHex, fonthex=name.fontHex)= name.label
+        form.form-horizontal(action="", method="post", role="form", id="addMood")
+          .form-group  
+              .input-prepend.input-append
+                select(data-style="btn-info" name="label").pull-left
+                  optgroup(label="Select Mood")
+                    each name, ix in moodMap
+                      option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
+          button.btn.btn-default.pull-left Submit Mood    
+    div.container
+      div.pull-right
+        h2 Comments
+              
+         

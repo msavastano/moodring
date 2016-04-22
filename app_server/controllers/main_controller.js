@@ -1,12 +1,18 @@
 var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
+var stringify = require('json-stringify-safe');
+var Verify    = require('./verify');
 
 // Homepage
 module.exports.index = function(req, res, next) {
   res.render('index', { title: 'My Page',
                         message: 'Welcome to',
-                        moodMap: moodMap.moods
+                        moodMap: moodMap.moods,
+                        request_userid : req['decoded']['_doc']['_id'],
+                        response_userid : res.req.decoded._doc._id,
+                        req : stringify(req),
+                        res : stringify(res)
                     });
 };
 
@@ -15,24 +21,41 @@ module.exports.addMoodToUser = function(req, res, next){
 };
 
 module.exports.new_mood = function(req, res, next){
-  if(req.params.userid){
+  //console.log(stringify(req.body));
+
+  if(req.decoded._doc._id){
     User
-      .findById(req.params.userid, function(err, user){
+      .findById(req.decoded._doc._id, function(err, user){
         if (err) {
           sendJSONresponse(res, 400, err);
         } else {
           Moods.create(req.body, function (err, mood) {
+            console.log("Request Body "+stringify(req.body));
             if (err) throw err;
+
             mood.label = req.body.label;
             user.moods.push(mood._id);
             user.save(function(err, user){
               console.log('Updated');
-              res.json(user);
+              //res.json(mood.label);
+              //next();
+              //sendJSONresponse(res, 200, mood);
+              res.render('index', {
+                title: 'My Page',
+                message: 'Welcome to',
+                moodMap: moodMap.moods,
+                user : res.req.decoded._doc.username
+              });
             });
           });
         }
       });
   }
+};
+
+var sendJSONresponse = function(res, status, content) {
+  res.status(status);
+  res.json(content);
 };
 
 var moodMap = {

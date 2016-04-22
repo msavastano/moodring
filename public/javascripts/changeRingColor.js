@@ -1,14 +1,16 @@
 $( document ).ready(function() {
+    //var  main_controller = require("../../app_server/controllers/main_controller");
     console.log("IN");
-    $('#moodChooser li a').on('click', function(){
-        var bgcolor = $(this).attr('hex');
-        var fontcolor = $(this).attr('fonthex');
-        $(this).parents('.btn-group').find('.dropdown-toggle').html($(this).text());
-        console.log(bgcolor);
-        console.log(fontcolor);
-        cbc(bgcolor);
-        cfc(fontcolor);
-    });
+    //$('#label li a').on('click', function(){
+    //    var bgcolor = $(this).attr('hex');
+    //    var fontcolor = $(this).attr('fonthex');
+    //    var lab = $(this).attr('lab');
+    //    console.log(lab);
+    //    $(this).parents('.btn-group').find('.dropdown-toggle').html($(this).text());
+    //    cbc(bgcolor);
+    //    cfc(fontcolor);
+        //main_controller.new_mood(label);
+    //});
 
     $('#friend_list_div li button').each(function(){
       var c = $(this).attr('moodcolor');

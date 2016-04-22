@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  div
+    h1= title
+    p #{message} #{title}
+    p #{request_userid}
+    p #{response_userid}
+    p Request #{req}
+    <!--  p ResponseDoodle #{res}-->
+  
+    
+    
+    div.container
+      div
+        form.form-horizontal(action="", method="post", role="form", id="addMood")
+          .form-group  
+              .input-prepend.input-append
+                .btn-group
+                  ul.nav.pull-left: .dropdown
+                    button.btn.btn-primary.dropdown-toggle( data-toggle="dropdown") 
+                      span.caret
+                    ul.dropdown-menu#moodChooser
+                      each name, ix in moodMap
+                        li: a(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label
+                          input.form-control(type="hidden", name="label", value=name.label,  rows="5")
+          button.btn.btn-default.pull-left Submit Mood            
+         
