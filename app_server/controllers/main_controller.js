@@ -12,7 +12,8 @@ module.exports.index = function(req, res, next) {
                         request_userid : req['decoded']['_doc']['_id'],
                         response_userid : res.req.decoded._doc._id,
                         req : stringify(req),
-                        res : stringify(res)
+                        res : stringify(res),
+                        user : res.req.decoded._doc.username
                     });
 };
 
@@ -24,15 +25,34 @@ module.exports.new_mood = function(req, res, next){
   //console.log(stringify(req.body));
 
   if(req.decoded._doc._id){
+    console.log("req.decoded._doc._id "+req.decoded._doc._id);
     User
       .findById(req.decoded._doc._id, function(err, user){
         if (err) {
           sendJSONresponse(res, 400, err);
         } else {
+
           Moods.create(req.body, function (err, mood) {
             console.log("Request Body "+stringify(req.body));
             if (err) throw err;
-
+            var m;
+            user.moods.forEach(function(m, i){
+              console.log("moodid "+m);
+              Moods.findById(m, function(err, md){
+                if (err) throw err;
+                //console.log("md1 "+md);
+                //md.comments = md.comments
+                if(m != md){
+                  md.latestMood = false;
+                }
+                console.log("md2 "+md);
+                md.save(function(err, location) {
+                  if (err) {
+                    if (err) throw err;
+                  }
+                });
+              });
+            });
             mood.label = req.body.label;
             user.moods.push(mood._id);
             user.save(function(err, user){
