@@ -5,6 +5,7 @@ block content
     h1= title
     p #{message} #{title}
     p #{user}
+    p #{currMood}
     <!--p #{response_userid}
     p Request #{req}
     p ResponseDoodle #{res}-->
@@ -14,15 +15,17 @@ block content
     div.container
       div
         form.form-horizontal(action="", method="post", role="form", id="addMood")
+          input(type="hidden", value=currMood, id="cm")
           .form-group  
               .input-prepend.input-append
-                select(data-style="btn-info" name="label").pull-left
+              
+                select(data-style="btn-info", name="label", id="moodChoices").pull-left
                   optgroup(label="Select Mood")
                     each name, ix in moodMap
                       option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
           button.btn.btn-default.pull-left Submit Mood    
     div.container
-      div.pull-right
+      div
         h2 Comments
               
          

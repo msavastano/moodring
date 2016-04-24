@@ -1,7 +1,8 @@
 $( document ).ready(function() {
     //var  main_controller = require("../../app_server/controllers/main_controller");
     console.log("IN");
-    //$('#label li a').on('click', function(){
+    var currMood = document.getElementById('cm').value;
+    $('#moodChoices').val(currMood);
     //    var bgcolor = $(this).attr('hex');
     //    var fontcolor = $(this).attr('fonthex');
     //    var lab = $(this).attr('lab');
