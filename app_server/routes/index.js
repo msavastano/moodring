@@ -22,9 +22,9 @@ router.get('/friend/:userid', ctrlFriendPage.index);
 router.get('/friendlist', ctrlFriendList.index);
 
 /* GET comment new screen */
-router.get('/:moodid/comment/new', ctrlComment.index);
+router.get('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.index);
 /*POST new comment*/
-router.post('/:moodid/comment/new', ctrlComment.new_comment);
+router.post('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
 
 /* GET comment on comment new screen */
 router.get('/:moodid/comment/:commentid/commentoncomment/new', ctrlCommentOnComment.index);
