@@ -21,9 +21,10 @@ var verifyOrdinaryUser = function (req, res, next) {
         jwt.verify(token, config.secretKey, function (err, decoded) {
             if (err) {
               //  console.log(req);
-                var err = new Error(stringify(req));
-                err.status = 401;
-                return next(err);
+              //var err = new Error(stringify(req));
+              var err = new Error("Not logged in!");
+              err.status = 401;
+              return next(err);
             } else {
                 // if everything is good, save to request for use in other routes
                 req.decoded = decoded;

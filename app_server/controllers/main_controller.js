@@ -19,8 +19,7 @@ module.exports.index = function(req, res, next) {
                                 message: 'Welcome to',
                                 moodMap: moodMap.moods,
                                 user : req.decoded._doc.username,
-                                currMood : cm.label,
-                                moodComments: cm.comments
+                                currMood : cm                              
                             });
         }
       });

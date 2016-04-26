@@ -5,7 +5,7 @@ block content
     h1= title
     p #{message} #{title}
     p #{user}
-    p #{currMood}
+    p #{currMood.label}
     <!--p #{response_userid}
     p Request #{req}
     p ResponseDoodle #{res}-->
@@ -13,7 +13,7 @@ block content
     div.container
       div
         form.form-horizontal(action="", method="post", role="form", id="addMood")
-          input(type="hidden", value=currMood, id="cm")
+          input(type="hidden", value=currMood.label, id="cm")
           .form-group  
               .input-prepend.input-append
               
@@ -23,11 +23,21 @@ block content
                       option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
           button.btn.btn-default.pull-left Submit Mood    
     div.container
-      h3 Comments
+      h3 Comments 
+      a(href="/"+currMood._id+"/comment/new") Comment on Mood
       .row
         .row.list-group
-          each com in moodComments
+          each com in currMood.comments
             .list-group-item
               p= com.comment 
               p= com.postedBy
+              p= com._id
+              a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/new")   Comment on Comment 
+                        
+              each comOncom in com.commentsOnComments
+                .list-group-item
+                  p= comOncom.commentOnComment 
+                  p= comOncom.postedBy
+                  p= comOncom._id
+                  
           

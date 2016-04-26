@@ -7,13 +7,9 @@ block content
   .row
   .col-xs-12.col-md-6
     form.form-horizontal(action="", method="post", role="form", id="addCommentOnComment")
-    .form-group
-      label.col-xs-10.col-sm-2.control-label(for="comment") Comment <!-- this will be uneditable comment-->
-      .col-xs-12.col-sm-10
-        input#name.form-control(name="comment")
-    .form-group
-          label.col-sm-2.control-label(for="commentOnComment") Comment On Comment
-          .col-sm-10
-            textarea#review.form-control(name="commentOnComment", rows="5")
-        button.btn.btn-default.pull-right Submit
+      .form-group
+        label.col-sm-2.control-label(for="commentOnComment") Comment On Comment
+        .col-sm-10
+          textarea#review.form-control(name="commentOnComment", rows="5")
+      button.btn.btn-default.pull-right Submit
     .col-xs-12.col-md-4

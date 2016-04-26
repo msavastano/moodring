@@ -27,9 +27,9 @@ router.get('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.index)
 router.post('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
 
 /* GET comment on comment new screen */
-router.get('/:moodid/comment/:commentid/commentoncomment/new', ctrlCommentOnComment.index);
+router.get('/:moodid/comment/:commentid/commentoncomment/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
 /*POST new comment on comment*/
-router.post('/:moodid/comment/:commentid/commentoncomment/new', ctrlCommentOnComment.new_comment_on_comment);
+router.post('/:moodid/comment/:commentid/commentoncomment/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 
 
 module.exports = router;
