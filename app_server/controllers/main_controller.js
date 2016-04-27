@@ -58,14 +58,16 @@ module.exports.findFriends = function(req, res, next){
     //console.log(users);
     users.forEach(function(u, i){
       //console.log(u.username.search(keyword));
-      if(u.username.search(keyword) != -1){
-        //console.log(u.username);
-        //keyword = keyword + " username"
-        matches.push(u);
-      }else if(u.firstname.search(keyword) != -1){
-        matches.push(u);
-      }else if(u.lastname.search(keyword) != -1){
-        matches.push(u);
+      if(u._id != req.decoded._doc._id){
+        if(u.username.search(keyword) != -1){
+          //console.log(u.username);
+          //keyword = keyword + " username"
+          matches.push(u);
+        }else if(u.firstname.search(keyword) != -1){
+          matches.push(u);
+        }else if(u.lastname.search(keyword) != -1){
+          matches.push(u);
+        }
       }
     });
     console.log(matches);
