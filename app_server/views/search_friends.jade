@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  div
+    h1= title
+    p #{message} #{title}
+    p #{user}
+    p #{key}
+      
+    
+    .row
+    .col-xs-12.col-md-6
+      form.form-horizontal(action="", method="post", role="form", id="searchfr")    
+        .form-group
+          label.col-sm-2.control-label(for="friend") Friend Search
+          .col-sm-10
+            input#review.form-control(name="friend")
+        button.btn.btn-default.pull-right Submit
+      .col-xs-12.col-md-4
+      
+    div.container
+     .row
+     .col-xs-12.col-md-6
+      .row.list-group
+        each find in finds
+          .list-group-item
+            p= find.username           

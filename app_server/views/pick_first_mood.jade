@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  div
+    h1= title
+    p #{message} #{title}
+    p #{user}
+    h3 Pick First Mood
+      
+    div.container
+      div
+        form.form-horizontal(action="", method="post", role="form", id="firstMood")
+          
+          .form-group  
+              .input-prepend.input-append
+              
+                select(data-style="btn-info", name="label", id="moodChoices").pull-left
+                  optgroup(label="Select Mood")
+                    each name, ix in moodMap
+                      option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
+          button.btn.btn-default.pull-left Submit Mood   

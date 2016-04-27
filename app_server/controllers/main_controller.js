@@ -10,27 +10,75 @@ module.exports.index = function(req, res, next) {
     if (err) throw err
     var umoods = user.moods;
     var cm;
-    umoods.forEach(function(m, i){
-      Moods.findById(m, function(err, md){
-        if(md.latestMood == true){
-          cm = md;
-          console.log(cm.comments);
-          res.render('index', { title: 'My Page',
-                                message: 'Welcome to',
-                                moodMap: moodMap.moods,
-                                user : req.decoded._doc.username,
-                                currMood : cm                              
-                            });
+    if(umoods.length == 0){
+      res.render('pick_first_mood', { title: 'My Page',
+                            message: 'Welcome to',
+                            moodMap: moodMap.moods,
+                            user : req.decoded._doc.username
+                        });
+    }else{
+      umoods.forEach(function(m, i){
+        Moods.findById(m, function(err, md){
+          if(md.latestMood == true){
+            cm = md;
+            console.log(cm.comments);
+            res.render('index', { title: 'My Page',
+                                  message: 'Welcome to',
+                                  moodMap: moodMap.moods,
+                                  user : req.decoded._doc.username,
+                                  currMood : cm
+                              });
+
         }
       });
+
     });
+  }
   });
 };
 
-module.exports.addMoodToUser = function(req, res, next){
-
+module.exports.searchFriends = function(req, res, next){
+  res.render('search_friends', { title: 'Search Friends',
+                        message: 'Welcome to',
+                        moodMap: moodMap.moods,
+                        user : req.decoded._doc.username,
+                        finds : []
+                    });
 };
 
+module.exports.findFriends = function(req, res, next){
+  var keyword = req.body.friend;
+  var matches = [];
+  /*
+    username
+    firstname
+    lastname
+  */
+  User.find({}, function(err, users){
+    //console.log(users);
+    users.forEach(function(u, i){
+      //console.log(u.username.search(keyword));
+      if(u.username.search(keyword) != -1){
+        //console.log(u.username);
+        //keyword = keyword + " username"
+        matches.push(u);
+      }else if(u.firstname.search(keyword) != -1){
+        matches.push(u);
+      }else if(u.lastname.search(keyword) != -1){
+        matches.push(u);
+      }
+    });
+    console.log(matches);
+    res.render('search_friends', { title: 'Search Friends',
+                          message: 'Welcome to',
+                          moodMap: moodMap.moods,
+                          user : req.decoded._doc.username,
+                          key : keyword,
+                          finds : matches
+                      });
+  });
+
+};
 
 module.exports.new_mood = function(req, res, next){
   if(req.decoded._doc._id){

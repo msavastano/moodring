@@ -15,6 +15,12 @@ router.get('/', Verify.verifyOrdinaryUser, ctrlMain.index);
 /* POST new mood */
 router.post('/', Verify.verifyOrdinaryUser, ctrlMain.new_mood);
 
+/* GET friend search page */
+router.get('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.searchFriends);
+
+/* POST friend search page */
+router.post('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.findFriends);
+
 /* GET home page. */
 router.get('/friend/:userid', ctrlFriendPage.index);
 
