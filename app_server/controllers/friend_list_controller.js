@@ -20,7 +20,7 @@ module.exports.index = function(req, res, next) {
                 console.log(u._id);
                 console.log(f);
                 console.log("");
-                if(u._id == f){
+                if(String(u._id) == String(f)){
                   fs.push(u);
                 }
               });
