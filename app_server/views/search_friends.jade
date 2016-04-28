@@ -23,5 +23,5 @@ block content
      .col-xs-12.col-md-6
       .row.list-group
         each find in finds
-          .list-group-item
-            p= find.username           
+          .list-group-item            
+            a(href="/friend/"+find._id)= find.username        

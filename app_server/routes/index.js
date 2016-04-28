@@ -22,10 +22,10 @@ router.get('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.searchFriends);
 router.post('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.findFriends);
 
 /* GET home page. */
-router.get('/friend/:userid', ctrlFriendPage.index);
+router.get('/friend/:friendid', Verify.verifyOrdinaryUser, ctrlFriendPage.index);
 
 /* GET friend list page. */
-router.get('/friendlist', ctrlFriendList.index);
+router.get('/friendlist', Verify.verifyOrdinaryUser, ctrlFriendList.index);
 
 /* GET comment new screen */
 router.get('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.index);
