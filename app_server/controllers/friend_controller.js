@@ -3,6 +3,24 @@ var Verify = require('./verify');
 var User = require('../models/users');
 var stringify = require('json-stringify-safe');
 
+
+module.exports.addFriend =  function(req, res, next) {
+  User.findById(req['decoded']['_doc']['_id'], function(err, user){
+
+    if(user.friends.indexOf(req.params.friendid) == -1){
+      if(err) throw err
+      console.log(req.params.friendid);
+      user.friends.push(req.params.friendid);
+      user.save(function(err,user) {
+        res.redirect('/friend/'+req.params.friendid);
+      });
+    }else{
+      res.redirect('/friend/'+req.params.friendid);
+    }
+  });
+
+};
+
 // Friend Page
 module.exports.index = function(req, res, next) {
   User.findById(req.params.friendid, function(err, friend){
@@ -21,7 +39,7 @@ module.exports.index = function(req, res, next) {
       Moods.findById(m, function(err, md){
         if(md.latestMood == true){
           cm = md;
-          //console.log(cm.comments);
+          console.log(cm);
           res.render('friend', { title: '\'s Page',
                                 message: 'Welcome to',
                                 moodMap: moodMap.moods,

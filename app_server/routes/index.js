@@ -21,8 +21,11 @@ router.get('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.searchFriends);
 /* POST friend search page */
 router.post('/searchfriends', Verify.verifyOrdinaryUser, ctrlMain.findFriends);
 
-/* GET home page. */
+/* GET friend page. */
 router.get('/friend/:friendid', Verify.verifyOrdinaryUser, ctrlFriendPage.index);
+
+/* POST add friend page. */
+router.post('/friend/:friendid', Verify.verifyOrdinaryUser, ctrlFriendPage.addFriend);
 
 /* GET friend list page. */
 router.get('/friendlist', Verify.verifyOrdinaryUser, ctrlFriendList.index);

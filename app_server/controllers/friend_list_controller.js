@@ -17,15 +17,15 @@ module.exports.index = function(req, res, next) {
             users.forEach(function(u, i){
 
               user.friends.forEach(function(f, i){
-                console.log(u._id);
-                console.log(f);
-                console.log("");
+                //console.log(u._id);
+                //console.log(f);
+                //console.log("");
                 if(String(u._id) == String(f)){
                   fs.push(u);
                 }
               });
             });
-            console.log(fs);
+            //console.log(fs);
             res.render('friend_list', { title: 'Friends List',
                                         message: 'Welcome to',
                                         friendsmap: data.friends,

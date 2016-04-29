@@ -7,6 +7,7 @@ var Verify    = require('./verify');
 // Homepage
 module.exports.index = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
+    console.log(req);
     if (err) throw err
     var umoods = user.moods;
     var cm;
@@ -70,7 +71,7 @@ module.exports.findFriends = function(req, res, next){
         }
       }
     });
-    console.log(matches);
+    //console.log(matches);
     res.render('search_friends', { title: 'Search Friends',
                           message: 'Welcome to',
                           moodMap: moodMap.moods,
