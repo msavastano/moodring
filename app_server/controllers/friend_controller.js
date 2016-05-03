@@ -27,16 +27,11 @@ module.exports.index = function(req, res, next) {
     if (err) throw err
     var fmoods = friend.moods;
     var cm;
-    /*if(umoods.length == 0){
-      res.render('pick_first_mood', { title: 'My Page',
-                            message: 'Welcome to',
-                            moodMap: moodMap.moods,
-                            fr : friend,
-                            user : req.decoded._doc.username
-                        });
-    }else{*/
     fmoods.forEach(function(m, i){
-      Moods.findById(m, function(err, md){
+      Moods.findById(m)
+      .populate('comments.postedBy')
+      .populate('comments.commentsOnComments.postedBy')
+      .exec(function(err, md){
         if(md.latestMood == true){
           cm = md;
           console.log(cm);
@@ -47,12 +42,9 @@ module.exports.index = function(req, res, next) {
                                 fr : friend,
                                 lastestFrMood : cm
                             });
-
         }
       });
-
     });
-  //}
   });
 };
 

@@ -19,7 +19,10 @@ module.exports.index = function(req, res, next) {
                         });
     }else{
       umoods.forEach(function(m, i){
-        Moods.findById(m, function(err, md){
+        Moods.findById(m)
+          .populate('comments.postedBy')
+          .populate('comments.commentsOnComments.postedBy')
+          .exec(function(err, md){
           if(md.latestMood == true){
             cm = md;
             console.log(cm.comments);

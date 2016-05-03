@@ -24,6 +24,7 @@ var verifyOrdinaryUser = function (req, res, next) {
               //var err = new Error(stringify(req));
               var err = new Error("Not logged in!");
               err.status = 401;
+              res.redirect('/users/login')
               return next(err);
             } else {
                 // if everything is good, save to request for use in other routes

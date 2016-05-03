@@ -22,14 +22,14 @@ block content
         each com in lastestFrMood.comments
           .list-group-item
             p= com.comment 
-            p= com.postedBy
-            p= com._id
+            p= com.postedBy.username
+            
             a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/new")   Comment on Comment 
                       
             each comOncom in com.commentsOnComments
               .list-group-item
                 p= comOncom.commentOnComment 
-                p= comOncom.postedBy
-                p= comOncom._id
+                p= comOncom.postedBy.username
+                
 
   
