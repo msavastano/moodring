@@ -7,7 +7,7 @@ var Verify    = require('./verify');
 // Homepage
 module.exports.index = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    console.log(req);
+    //console.log(req);
     if (err) throw err
     var umoods = user.moods;
     var cm;
@@ -38,6 +38,27 @@ module.exports.index = function(req, res, next) {
 
     });
   }
+  });
+};
+
+module.exports.old_moods = function (req, res, next) {
+  User.findById(req['decoded']['_doc']['_id'])
+      .populate('moods')
+      .exec(function(err, user){
+        var oldMoods = [];
+        //console.log(user.moods);
+        user.moods.forEach(function(m, i){
+
+          if(m.latestMood == false){
+            oldMoods.push(m);
+          }
+
+        });
+        res.render('old_moods', { title: 'Old Moods',
+                              moodMap: moodMap.moods,
+                              user : user,
+                              oMoods:oldMoods
+                          });
   });
 };
 
@@ -77,7 +98,6 @@ module.exports.findFriends = function(req, res, next){
     //console.log(matches);
     res.render('search_friends', { title: 'Search Friends',
                           message: 'Welcome to',
-                          moodMap: moodMap.moods,
                           user : req.decoded._doc.username,
                           key : keyword,
                           finds : matches

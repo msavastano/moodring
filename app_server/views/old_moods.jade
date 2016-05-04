@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  div
+    h1= title
+        
+    .row
+      .row.list-group
+        each mood in oMoods
+          .list-group-item
+            p= mood.label
+            p= mood.createdAt

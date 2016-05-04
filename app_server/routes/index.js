@@ -8,6 +8,8 @@ var ctrlFriendList = require('../controllers/friend_list_controller');
 var ctrlComment = require('../controllers/comment_controller');
 var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller');
 
+/* GET Old Moods page. */
+router.get('/oldmoods', Verify.verifyOrdinaryUser, ctrlMain.old_moods);
 
 /* GET home page. */
 router.get('/', Verify.verifyOrdinaryUser, ctrlMain.index);

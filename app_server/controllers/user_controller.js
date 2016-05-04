@@ -32,24 +32,10 @@ module.exports.register_user = function(req, res, next){
         });
     });
 }
-  /*
-  User.create(req.body, function (err, user) {
-        if (err) throw err;
-        console.log('User created!');
-        var id = user._id;
-        res.writeHead(200, {
-            'Content-Type': 'text/plain'
-        });
-
-        res.end('Added the user with id: ' + id);
-    });
-    */
-
-
 
 module.exports.login_user = function(req, res, next){
   console.log("login_user");
-  console.log(req.body);
+  //console.log(req.body);
   passport.authenticate('local', function(err, user, info) {
     if (err) {
       return next(err);

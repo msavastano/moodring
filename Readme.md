@@ -12,3 +12,12 @@
 * Jade, HTML, Bootstrap, CSS
 * Javascript, jQuery
 
+###TODO
+* Fix authentication - make secure
+* link old moods to a per mood screen
+* design each page
+* find places to use populate
+* https
+* certify
+* change color to be like mood ring
+* redirect comment posts to correct page
