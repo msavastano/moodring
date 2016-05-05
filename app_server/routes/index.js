@@ -37,6 +37,9 @@ router.get('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.index)
 /*POST new comment*/
 router.post('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
 
+/* GET  old mood*/
+router.get('/oldmoods/:moodid', Verify.verifyOrdinaryUser, ctrlMain.old_mood);
+
 /* GET comment on comment new screen */
 router.get('/:moodid/comment/:commentid/commentoncomment/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
 /*POST new comment on comment*/

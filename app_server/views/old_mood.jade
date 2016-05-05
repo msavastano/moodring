@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  
+  h1 #{title}
+  p= md
+  
+  
+  
+  div.container
+    p= md.label
+    
+  div.container
+    h3 Comments 
+    
+    .row
+      .row.list-group
+        each com in md.comments
+          .list-group-item#coms
+            p= com.comment 
+            p= com.postedBy.username
+            
+            
+                      
+            each comOncom in com.commentsOnComments
+              .list-group-item#comsoncoms
+                p= comOncom.commentOnComment 
+                p= comOncom.postedBy.username
+                
+
+  

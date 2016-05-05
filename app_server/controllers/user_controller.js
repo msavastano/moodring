@@ -7,7 +7,6 @@ var Verify    = require('./verify');
 var User = require('../models/users');
 var request = require('request');
 
-
 module.exports.register_user = function(req, res, next){
   console.log("register_user");
   console.log(req.body);
@@ -65,6 +64,11 @@ module.exports.login_user = function(req, res, next){
     });
     console.log(res);
   })(req,res,next);
+};
+
+module.exports.logout =  function(req, res) {
+  res.clearCookie('auth');
+  res.redirect('/users/login');
 };
 
 module.exports.login_page = function(req, res, next){

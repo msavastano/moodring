@@ -25,14 +25,14 @@ block content
       .row
         .row.list-group
           each com in currMood.comments
-            .list-group-item
+            .list-group-item#coms
               p= com.comment 
               p= com.postedBy.username
                            
               a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/new")   Comment on Comment 
                         
               each comOncom in com.commentsOnComments
-                .list-group-item
+                .list-group-item#comsoncoms
                   p= comOncom.commentOnComment 
                   p= comOncom.postedBy.username                
                   

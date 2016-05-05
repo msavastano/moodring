@@ -25,7 +25,7 @@ module.exports.index = function(req, res, next) {
           .exec(function(err, md){
           if(md.latestMood == true){
             cm = md;
-            console.log(cm.comments);
+            //console.log(cm.comments);
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
                                   moodMap: moodMap.moods,
@@ -38,6 +38,19 @@ module.exports.index = function(req, res, next) {
 
     });
   }
+  });
+};
+
+module.exports.old_mood = function (req, res, next) {
+  Moods.findById(req.params.moodid)
+  .populate('comments.postedBy')
+  .populate('comments.commentsOnComments.postedBy')
+  .exec(function(err, md){
+    res.render('old_mood', { title: 'Old Mood',
+                          moodMap: moodMap.moods,                          
+                          md:md
+                      });
+
   });
 };
 

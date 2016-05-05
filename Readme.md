@@ -21,3 +21,9 @@
 * certify
 * change color to be like mood ring
 * redirect comment posts to correct page
+* make db on heroku - connect from local
+* better user model
+* upload profile pics
+* add friend button turns to remove
+* logout button
+* ok - cancel modals
