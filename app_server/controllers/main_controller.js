@@ -6,18 +6,21 @@ var Verify    = require('./verify');
 
 // Homepage
 module.exports.index = function(req, res, next) {
+  
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    //console.log(req);
+    //console.log(err);
     if (err) throw err
     var umoods = user.moods;
     var cm;
     if(umoods.length == 0){
+
       res.render('pick_first_mood', { title: 'My Page',
                             message: 'Welcome to',
                             moodMap: moodMap.moods,
                             user : req.decoded._doc.username
                         });
     }else{
+
       umoods.forEach(function(m, i){
         Moods.findById(m)
           .populate('comments.postedBy')
@@ -47,7 +50,7 @@ module.exports.old_mood = function (req, res, next) {
   .populate('comments.commentsOnComments.postedBy')
   .exec(function(err, md){
     res.render('old_mood', { title: 'Old Mood',
-                          moodMap: moodMap.moods,                          
+                          moodMap: moodMap.moods,
                           md:md
                       });
 

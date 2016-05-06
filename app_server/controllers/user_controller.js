@@ -47,22 +47,23 @@ module.exports.login_user = function(req, res, next){
     req.logIn(user, function(err) {
       if (err) {
         res.redirect('/login');
-        return res.status(500).json({
-          err: 'Could not log in user'
-        });
+        //return res.status(500).json({
+          //err: 'Could not log in user'
+        //});
       }
 
       var token = Verify.getToken(user);
       //req.headers['x-access-token'] = token
       res.cookie('auth',token);
-      res.status(200).json({
+      res.redirect('/');
+      /*res.status(200).json({
         status: 'Login successful!',
         success: true,
         token: token
-      });
+      });*/
 
     });
-    console.log(res);
+    //console.log(res);
   })(req,res,next);
 };
 

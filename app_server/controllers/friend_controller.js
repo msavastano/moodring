@@ -23,26 +23,45 @@ module.exports.addFriend =  function(req, res, next) {
 
 // Friend Page
 module.exports.index = function(req, res, next) {
-  User.findById(req.params.friendid, function(err, friend){
-    if (err) throw err
-    var fmoods = friend.moods;
-    var cm;
-    fmoods.forEach(function(m, i){
-      Moods.findById(m)
-      .populate('comments.postedBy')
-      .populate('comments.commentsOnComments.postedBy')
-      .exec(function(err, md){
-        if(md.latestMood == true){
-          cm = md;
-          console.log(cm);
-          res.render('friend', { title: '\'s Page',
-                                message: 'Welcome to',
-                                moodMap: moodMap.moods,
-                                user : req.decoded._doc.username,
-                                fr : friend,
-                                lastestFrMood : cm
-                            });
+  User.findById(req['decoded']['_doc']['_id'])
+    .populate('friends')
+    .exec(function(err, user){
+      User.findById(req.params.friendid, function(err, friend){
+        var friendBtn = false;
+        user.friends.forEach(function(f, i){
+          console.log(f._id);
+          console.log(friend._id);
+          if(String(f._id) == String(friend._id)) friendBtn = true;
+          console.log(friendBtn);
+        });
+        var friendBtnStr = "";
+        if(friendBtn){
+          friendBtnStr = "Remove Friend";
+        }else{
+          friendBtnStr = "Add Friend";
         }
+        console.log(friendBtnStr);
+        if (err) throw err
+        var fmoods = friend.moods;
+        var cm;
+        fmoods.forEach(function(m, i){
+          Moods.findById(m)
+          .populate('comments.postedBy')
+          .populate('comments.commentsOnComments.postedBy')
+          .exec(function(err, md){
+            if(md.latestMood == true){
+              cm = md;
+              //console.log(cm);
+              res.render('friend', { title: '\'s Page',
+                                    message: 'Welcome to',
+                                    moodMap: moodMap.moods,
+                                    user : req.decoded._doc.username,
+                                    fr : friend,
+                                    lastestFrMood : cm,
+                                    frBtnStr : friendBtnStr
+                                });
+            }
+        });
       });
     });
   });
