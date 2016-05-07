@@ -14,7 +14,7 @@
 
 ###TODO
 * Fix authentication - make secure
-* link old moods to a per mood screen
+* ~~link old moods to a per mood screen~~
 * design each page
 * find places to use populate
 * https
@@ -24,6 +24,9 @@
 * make db on heroku - connect from local
 * better user model
 * upload profile pics
-* add friend button turns to remove
-* logout button
+* ~~add friend button turns to remove~~
+* ~~logout button~~
 * ok - cancel modals
+* permissions on what others can see or do
+* password reset
+* profile page

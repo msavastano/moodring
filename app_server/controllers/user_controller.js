@@ -10,26 +10,31 @@ var request = require('request');
 module.exports.register_user = function(req, res, next){
   console.log("register_user");
   console.log(req.body);
-  User.register(new User({ username : req.body.username }),
-        req.body.password, function(err, user) {
-        if (err) {
-            return res.status(500).json({err: err});
-        }
-        if(req.body.firstname) {
-            user.firstname = req.body.firstname;
-        }
-        if(req.body.lastname) {
-            user.lastname = req.body.lastname;
-        }
-        if(req.body.email) {
-            user.email = req.body.email;
-        }
-        user.save(function(err,user) {
-            passport.authenticate('local')(req, res, function () {
-                return res.status(200).json({status: 'Registration Successful!'});
-            });
-        });
-    });
+  if(req.body.passwordverify == req.body.password){
+    User.register(new User({ username : req.body.username }),
+          req.body.password, function(err, user) {
+          if (err) {
+              return res.status(500).json({err: err});
+          }
+          if(req.body.firstname) {
+              user.firstname = req.body.firstname;
+          }
+          if(req.body.lastname) {
+              user.lastname = req.body.lastname;
+          }
+          if(req.body.email) {
+              user.email = req.body.email;
+          }
+          user.save(function(err,user) {
+              passport.authenticate('local')(req, res, function () {
+                  return res.status(200).json({status: 'Registration Successful!'});
+              });
+          });
+      });
+  }else{
+    return res.status(200).json({status: 'passwords do not match'});
+  }
+
 }
 
 module.exports.login_user = function(req, res, next){
