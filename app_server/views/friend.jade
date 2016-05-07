@@ -16,7 +16,7 @@ block content
     
   div.container
     h3 Comments 
-    a(href="/"+lastestFrMood._id+"/comment/new") Comment on Mood
+    a(href="/"+lastestFrMood._id+"/comment/"+fr._id+"/new") Comment on Mood
     .row
       .row.list-group
         each com in lastestFrMood.comments
@@ -24,7 +24,7 @@ block content
             p= com.comment 
             p= com.postedBy.username
             
-            a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/new")   Comment on Comment 
+            a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/"+fr._id+"/new")   Comment on Comment 
                       
             each comOncom in com.commentsOnComments
               .list-group-item#comsoncoms

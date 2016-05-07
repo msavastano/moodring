@@ -32,18 +32,17 @@ router.post('/friend/:friendid', Verify.verifyOrdinaryUser, ctrlFriendPage.addFr
 /* GET friend list page. */
 router.get('/friendlist', Verify.verifyOrdinaryUser, ctrlFriendList.index);
 
-/* GET comment new screen */
-router.get('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.index);
-/*POST new comment*/
-router.post('/:moodid/comment/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
-
 /* GET  old mood*/
 router.get('/oldmoods/:moodid', Verify.verifyOrdinaryUser, ctrlMain.old_mood);
 
+/* GET comment new screen */
+router.get('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.index);
+/*POST new comment*/
+router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
 /* GET comment on comment new screen */
-router.get('/:moodid/comment/:commentid/commentoncomment/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
+router.get('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
 /*POST new comment on comment*/
-router.post('/:moodid/comment/:commentid/commentoncomment/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
+router.post('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 
 
 module.exports = router;

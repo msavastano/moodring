@@ -21,7 +21,7 @@ block content
           button.btn.btn-default.pull-left Submit Mood    
     div.container
       h3 Comments 
-      a(href="/"+currMood._id+"/comment/new") Comment on Mood
+      a(href="/"+currMood._id+"/comment/"+userid+"/new") Comment on Mood
       .row
         .row.list-group
           each com in currMood.comments
@@ -29,7 +29,7 @@ block content
               p= com.comment 
               p= com.postedBy.username
                            
-              a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/new")   Comment on Comment 
+              a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new")   Comment on Comment 
                         
               each comOncom in com.commentsOnComments
                 .list-group-item#comsoncoms

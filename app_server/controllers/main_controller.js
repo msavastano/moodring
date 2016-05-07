@@ -6,7 +6,7 @@ var Verify    = require('./verify');
 
 // Homepage
 module.exports.index = function(req, res, next) {
-  
+
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
     //console.log(err);
     if (err) throw err
@@ -17,6 +17,7 @@ module.exports.index = function(req, res, next) {
       res.render('pick_first_mood', { title: 'My Page',
                             message: 'Welcome to',
                             moodMap: moodMap.moods,
+                            userid : req.decoded._doc._id,
                             user : req.decoded._doc.username
                         });
     }else{
@@ -33,6 +34,7 @@ module.exports.index = function(req, res, next) {
                                   message: 'Welcome to',
                                   moodMap: moodMap.moods,
                                   user : req.decoded._doc.username,
+                                  userid : req.decoded._doc._id,
                                   currMood : cm
                               });
 
