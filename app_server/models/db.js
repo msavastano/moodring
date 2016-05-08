@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/moodring';
-mongoose.connect(dbURI);
 
 if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGOLAB_URI;    
+    dbURI = process.env.MONGOLAB_URI;
 }
-
+mongoose.connect(dbURI);
 // Second connection
 //var dbURILog = 'mongodb://localhost/Loc8rLog';
 //var logDB = mongoose.createConnection(dbURILog);
