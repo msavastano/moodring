@@ -4,12 +4,14 @@ var dbURI = 'mongodb://localhost/moodring';
 mongoose.connect(dbURI);
 
 if (process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGOLAB_URI;
+    //dbURI = process.env.MONGOLAB_URI;
+    dbURI = 'mongodb://heroku_56wdrfxq:4q4ft9l4iheupfko4kasi4c5pb@ds011248.mlab.com:11248/heroku_56wdrfxq';
 }
 
 // Second connection
 //var dbURILog = 'mongodb://localhost/Loc8rLog';
 //var logDB = mongoose.createConnection(dbURILog);
+
 
 
 var readLine = require ("readline");
