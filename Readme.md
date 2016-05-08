@@ -20,7 +20,7 @@
 * https
 * certify
 * change color to be like mood ring
-* redirect comment posts to correct page
+* ~~redirect comment posts to correct page~~
 * make db on heroku - connect from local
 * better user model
 * upload profile pics
@@ -30,3 +30,6 @@
 * permissions on what others can see or do
 * password reset
 * profile page
+* logon/logout button view at right times
+* make login timeout work right
+* gitignore

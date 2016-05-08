@@ -1,5 +1,5 @@
 module.exports = {
-    'secretKey': '12345-67890-09876-54321',
+    'secretKey': '12345-67890-09876-54334',
     'mongoUrl' : 'mongodb://localhost:27017/moodring',
     'facebook': {
         clientID: '1677631512487156',
