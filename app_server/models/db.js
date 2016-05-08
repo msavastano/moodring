@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/moodring';
 mongoose.connect(dbURI);
-/*
+
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
@@ -23,7 +23,7 @@ if (process.platform === "win32"){
     });
 }
 
-*/
+
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
     console.log('Mongoose connected to ' + dbURI);
