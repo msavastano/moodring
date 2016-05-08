@@ -16,14 +16,14 @@ block content
         each com in md.comments
           .list-group-item#coms
             p= com.comment 
-            p= com.postedBy.username
+            p POSTED BY: #{com.postedBy.username}
             
             
                       
             each comOncom in com.commentsOnComments
-              .list-group-item#comsoncoms
+              .list-group-item#coms
                 p= comOncom.commentOnComment 
-                p= comOncom.postedBy.username
+                p POSTED BY: #{comOncom.postedBy.username}
                 
 
   

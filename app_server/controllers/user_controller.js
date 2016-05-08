@@ -60,6 +60,7 @@ module.exports.login_user = function(req, res, next){
       var token = Verify.getToken(user);
       //req.headers['x-access-token'] = token
       res.cookie('auth',token);
+
       res.redirect('/');
       /*res.status(200).json({
         status: 'Login successful!',
@@ -71,6 +72,12 @@ module.exports.login_user = function(req, res, next){
     //console.log(res);
   })(req,res,next);
 };
+
+//module.exports.refreshToken = function(req, res){
+//var token = Verify.getToken(user);
+  //req.headers['x-access-token'] = token
+  //res.cookie('auth',token);
+//}
 
 module.exports.logout =  function(req, res) {
   res.clearCookie('auth');

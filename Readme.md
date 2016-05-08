@@ -32,4 +32,9 @@
 * profile page
 * logon/logout button view at right times
 * make login timeout work right
-* gitignore
+* ~~gitignore~~
+* fix mood choosing drodowns everywhere
+* lots o error checking
+** can't go to page of user without moods
+** deleted users
+** messing with urls

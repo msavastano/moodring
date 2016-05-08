@@ -3,11 +3,12 @@ var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('../../config.js');
 var passport = require('passport');
 var stringify = require('json-stringify-safe');
+//var userCnt = require('./user_controller');
 
 
  var getToken = function (user) {
     return jwt.sign(user, config.secretKey, {
-        expiresIn: 3600
+        expiresIn: 360
     });
 };
 
@@ -26,7 +27,9 @@ var verifyOrdinaryUser = function (req, res, next) {
               //return next(err);
             } else {
                 // if everything is good, save to request for use in other routes
-                req.decoded = decoded;                
+                //userCnt.refreshToken();
+                //jwt.updateToken(token);
+                req.decoded = decoded;
                 next();
             }
         });
@@ -37,6 +40,12 @@ var verifyOrdinaryUser = function (req, res, next) {
         err.status = 403;
         return next(err);
     }
+};
+
+var refreshToken = function(req, res){
+  var token = getToken(user);
+  //req.headers['x-access-token'] = token
+  res.cookie('auth',token);
 };
 
  var verifyAdmin = function(req, res, next){

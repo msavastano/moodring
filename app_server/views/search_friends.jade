@@ -23,4 +23,4 @@ block content
       .row.list-group
         each find in finds
           .list-group-item            
-            a(href="/friend/"+find._id)= find.username        
+            a(href="/friend/"+find._id).btn.btn-default #{find.username}

@@ -2,14 +2,14 @@ $( document ).ready(function() {
     //var  main_controller = require("../../app_server/controllers/main_controller");
     console.log("IN");
     var currMood = document.getElementById('cm').value;
-    $('#moodChoices').val(currMood);  
-
-    $('#friend_list_div li button').each(function(){
+    $('#moodChoices').val(currMood);
+    $('#firstMoodChoices').val('Select First Mood');
+    /*$('#friend_list_div li button').each(function(){
       var c = $(this).attr('moodcolor');
       console.log($(this));
       console.log($(this).css('backgroundColor'));
       $(this).css('backgroundColor', c)
-    });
+    });*/
 });
 
 var cbc = function changeBackground(color) {
