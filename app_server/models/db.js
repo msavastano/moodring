@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 
 var dbURI = 'mongodb://localhost/moodring';
 
-//if (process.env.NODE_ENV === 'production') {
-dbURI = process.env.MONGOLAB_URI;
-dbURI = 'mongodb://heroku_56wdrfxq:4q4ft9l4iheupfko4kasi4c5pb@ds011248.mlab.com:11248/heroku_56wdrfxq';
-//}
+if (process.env.NODE_ENV === 'production') {
+  dbURI = process.env.MONGOLAB_URI;
+  //dbURI = 'mongodb://heroku_56wdrfxq:4q4ft9l4iheupfko4kasi4c5pb@ds011248.mlab.com:11248/heroku_56wdrfxq';
+}
 console.log(dbURI);
 mongoose.connect(dbURI);
 // Second connection
@@ -13,7 +13,7 @@ mongoose.connect(dbURI);
 //var logDB = mongoose.createConnection(dbURILog);
 
 
-
+/*
 var readLine = require ("readline");
 if (process.platform === "win32"){
     var rl = readLine.createInterface ({
@@ -25,7 +25,7 @@ if (process.platform === "win32"){
     });
 }
 
-
+*/
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
     console.log('Mongoose connected to ' + dbURI);
@@ -37,6 +37,7 @@ mongoose.connection.on('disconnected', function() {
     console.log('Mongoose disconnected');
 });
 
+/*
 // CAPTURE APP TERMINATION / RESTART EVENTS
 // To be called when process is restarted or terminated
 gracefulShutdown = function(msg, callback) {
@@ -64,7 +65,7 @@ process.on('SIGTERM', function() {
         process.exit(0);
     });
 });
-
+*/
 // BRING IN YOUR SCHEMAS & MODELS
 require('./moods');
 require('./users');
