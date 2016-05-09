@@ -10,7 +10,7 @@ function getSecretKey() {
   if (app.get('env') === 'development') {
     return '12345-67890-09876-54334'
   }else{
-    return '12345-67890-09876-54334'
+    return process.env.JWT_SECRET;
  }
 };
 

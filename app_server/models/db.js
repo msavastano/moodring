@@ -5,7 +5,7 @@ var app = express();
 var dbURI = 'mongodb://localhost/moodring';
 
 if (app.get('env') === 'production') {
-  dbURI = process.env.MONGODB_URI;  ;
+  dbURI = process.env.MONGODB_URI;
 }
 console.log(process.env);
 mongoose.connect(dbURI);
