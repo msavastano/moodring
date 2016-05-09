@@ -5,10 +5,9 @@ var app = express();
 var dbURI = 'mongodb://localhost/moodring';
 
 if (app.get('env') === 'production') {
-  //dbURI = process.env.MONGOLAB_URI;
-  dbURI = 'mongodb://heroku_56wdrfxq:4q4ft9l4iheupfko4kasi4c5pb@ds011248.mlab.com:11248/heroku_56wdrfxq';
+  dbURI = process.env.MONGODB_URI;  ;
 }
-console.log(dbURI);
+console.log(process.env);
 mongoose.connect(dbURI);
 // Second connection
 //var dbURILog = 'mongodb://localhost/Loc8rLog';
