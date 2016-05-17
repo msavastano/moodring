@@ -8,7 +8,7 @@ var stringify = require('json-stringify-safe');
 
  var getToken = function (user) {
     return jwt.sign(user, config.secretKey, {
-        expiresIn: 360
+        expiresIn: 84300
     });
 };
 
@@ -38,7 +38,7 @@ var verifyOrdinaryUser = function (req, res, next) {
         // return an error
         var err = new Error('No token provided!');
         err.status = 403;
-        return next(err);
+        res.redirect('/users/login');
     }
 };
 

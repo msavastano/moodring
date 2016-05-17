@@ -13,26 +13,37 @@ module.exports.register_user = function(req, res, next){
   if(req.body.passwordverify == req.body.password){
     User.register(new User({ username : req.body.username }),
           req.body.password, function(err, user) {
-          if (err) {
-              return res.status(500).json({err: err});
-          }
-          if(req.body.firstname) {
-              user.firstname = req.body.firstname;
-          }
-          if(req.body.lastname) {
-              user.lastname = req.body.lastname;
-          }
-          if(req.body.email) {
-              user.email = req.body.email;
-          }
-          user.save(function(err,user) {
-              passport.authenticate('local')(req, res, function () {
-                  return res.status(200).json({status: 'Registration Successful!'});
+            if (err) {
+                //return res.status(500).json({err: err});
+                res.render('register', { title: 'New Registration',
+                                      passwordError: err.message,
+                                         message: 'Welcome to'
+                                       });
+
+            }else{
+              if(req.body.firstname) {
+                  user.firstname = req.body.firstname;
+              }
+              if(req.body.lastname) {
+                  user.lastname = req.body.lastname;
+              }
+              if(req.body.email) {
+                  user.email = req.body.email;
+              }
+              user.save(function(err,user) {
+                  passport.authenticate('local')(req, res, function () {
+                      //return res.status(200).json({status: 'Registration Successful!'});
+                      res.redirect('/users/login');
+                  });
               });
-          });
+            }
       });
   }else{
-    return res.status(200).json({status: 'passwords do not match'});
+    //return res.status(200).json({status: 'passwords do not match'});
+    res.render('register', { title: 'New Registration',
+                          passwordError: 'passwords do not match',
+                             message: 'Welcome to'
+                           });
   }
 
 }
@@ -45,30 +56,30 @@ module.exports.login_user = function(req, res, next){
       return next(err);
     }
     if (!user) {
-      return res.status(401).json({
-        err: info
+      res.render('login', { title: 'Login',
+                            message: 'Username or Password is incorrect'});
+    }else{
+      req.logIn(user, function(err) {
+        if (err) {
+          res.redirect('/users/login');
+          //return res.status(500).json({
+            //err: 'Could not log in user'
+          //});
+        }
+
+        var token = Verify.getToken(user);
+        //req.headers['x-access-token'] = token
+        res.cookie('auth',token);
+
+        res.redirect('/');
+        /*res.status(200).json({
+          status: 'Login successful!',
+          success: true,
+          token: token
+        });*/
+
       });
     }
-    req.logIn(user, function(err) {
-      if (err) {
-        res.redirect('/login');
-        //return res.status(500).json({
-          //err: 'Could not log in user'
-        //});
-      }
-
-      var token = Verify.getToken(user);
-      //req.headers['x-access-token'] = token
-      res.cookie('auth',token);
-
-      res.redirect('/');
-      /*res.status(200).json({
-        status: 'Login successful!',
-        success: true,
-        token: token
-      });*/
-
-    });
     //console.log(res);
   })(req,res,next);
 };
@@ -87,11 +98,13 @@ module.exports.logout =  function(req, res) {
 module.exports.login_page = function(req, res, next){
   console.log("login_page");
   res.render('login', { title: 'Login',
-                        message: 'Welcome to'});
+                        message: 'Welcome'});
 };
 
 module.exports.register_page = function(req, res, next){
   console.log("register_page");
   res.render('register', { title: 'New Registration',
-                        message: 'Welcome to'});
+                        message: 'Welcome to',
+                      passwordError:''
+                    });
 };
