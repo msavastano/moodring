@@ -14,7 +14,7 @@ module.exports.index = function(req, res, next) {
     var cm;
     if(umoods.length == 0){
 
-      res.render('pick_first_mood', { title: 'My Page',
+      res.render('pick_first_mood', { title: 'My mood',
                             message: 'Welcome to',
                             moodMap: moodMap.moods,
                             userid : req.decoded._doc._id,

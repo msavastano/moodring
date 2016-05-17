@@ -6,7 +6,7 @@ var stringify = require('json-stringify-safe');
 
 module.exports.addFriend =  function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    
+
     if(user.friends.indexOf(req.params.friendid) == -1){
       if(err) throw err
       //console.log(req.params.friendid);
@@ -52,7 +52,7 @@ module.exports.index = function(req, res, next) {
             if(md.latestMood == true){
               cm = md;
               //console.log(cm);
-              res.render('friend', { title: '\'s Page',
+              res.render('friend', { title: friend.username+'\'s Page',
                                     message: 'Welcome to',
                                     moodMap: moodMap.moods,
                                     user : req.decoded._doc.username,

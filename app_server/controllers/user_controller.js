@@ -11,12 +11,12 @@ module.exports.register_user = function(req, res, next){
   console.log("register_user");
   console.log(req.body);
   if(req.body.passwordverify == req.body.password){
-    User.register(new User({ username : req.body.username }),
+    User.register(new User({ username : req.body.username, email : req.body.email}),
           req.body.password, function(err, user) {
             if (err) {
                 //return res.status(500).json({err: err});
                 res.render('register', { title: 'New Registration',
-                                      passwordError: err.message,
+                                      passwordError: err,
                                          message: 'Welcome to'
                                        });
 
@@ -27,9 +27,9 @@ module.exports.register_user = function(req, res, next){
               if(req.body.lastname) {
                   user.lastname = req.body.lastname;
               }
-              if(req.body.email) {
-                  user.email = req.body.email;
-              }
+            //  if(req.body.email) {
+            //      user.email = req.body.email;
+            //  }
               user.save(function(err,user) {
                   passport.authenticate('local')(req, res, function () {
                       //return res.status(200).json({status: 'Registration Successful!'});

@@ -7,7 +7,7 @@ var dbURI = 'mongodb://localhost/moodring';
 if (app.get('env') === 'production') {
   dbURI = process.env.MONGODB_URI;
 }
-console.log(process.env);
+//console.log(process.env);
 mongoose.connect(dbURI);
 // Second connection
 //var dbURILog = 'mongodb://localhost/Loc8rLog';

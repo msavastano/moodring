@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var User = new Schema({
     username: {
@@ -25,7 +26,10 @@ var User = new Schema({
     },
     email: {
       type: String,
-      'default': ''
+      index: true,
+      unique: true,
+      required: true,
+      uniqueCaseInsensitive: true 
     },
     admin:   {
         type: Boolean,
@@ -49,5 +53,6 @@ User.methods.getName = function() {
 };
 
 User.plugin(passportLocalMongoose);
+User.plugin(uniqueValidator);
 var Users = mongoose.model('User', User, 'users');
 module.exports = Users;

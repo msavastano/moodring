@@ -22,6 +22,7 @@
     "jwt-simple": "^0.5.0",
     "less-middleware": "1.0.x",
     "mongoose": "~4.4.8",
+    "mongoose-unique-validator": "^1.0.2",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
