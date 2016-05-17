@@ -5,27 +5,28 @@ block content
     h1 (#{user})
     p #{message} #{title} 
     
-    div.container-fluid
-      .div.col-xs-12.col-sm-4.mood-div
-        form.form-horizontal(action="", method="post", role="form", id="addMood")
-          input(type="hidden", value=currMood.label, id="cm")
-          .form-group  
-            .input-prepend.input-append              
-              select(name="label", id="moodChoices").form-control
-                optgroup(label="Select Mood")
-                  each name, ix in moodMap
-                    option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
-          button.btn.btn-default.btn-sm Submit Mood    
-    div.container
-      h3 Comments 
-      a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Comment on Mood      
+  div.container-fluid
+    .div.col-xs-12.col-sm-4.mood-div
+      form.form-horizontal(action="", method="post", role="form", id="addMood")
+        input(type="hidden", value=currMood.label, id="cm")
+        .form-group  
+          .input-prepend.input-append              
+            select(name="label", id="moodChoices").form-control
+              optgroup(label="Select Mood")
+                each name, ix in moodMap
+                  option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
+        button.btn.btn-default.btn-sm Submit Mood    
+  div.container-fluid
+    h3 Comments 
+    a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Ring on Mood  
+    .div.col-xs-12    
       .row.list-group
         each com in currMood.comments
           .list-group-item#coms
             p= com.comment 
             p POSTED BY: #{com.postedBy.username}
                          
-            a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Comment on Comment 
+            a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Ring on Ring 
                       
             each comOncom in com.commentsOnComments
               .list-group-item#coms
