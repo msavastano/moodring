@@ -14,18 +14,18 @@ block content
     form.form-horizontal(action="", method="post", role="form", id="add_friend")
       .form-group        
         input.form-control(name="add_friend_btn", rows="5", type="hidden")
-      button.btn.btn-default #{frBtnStr} 
+      button.btn.btn-default.btn-sm #{frBtnStr} 
     
   div.container
     h3 Comments 
-    a(href="/"+lastestFrMood._id+"/comment/"+fr._id+"/new").btn.btn-default Comment on Mood
+    a(href="/"+lastestFrMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Comment on Mood
     
     .row.list-group
       each com in lastestFrMood.comments
         .list-group-item#coms
           p= com.comment 
           p POSTED BY: #{com.postedBy.username}
-          a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/"+fr._id+"/new").btn.btn-primary Comment on Comment                     
+          a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/"+fr._id+"/new").btn.btn-primary.btn-sm Comment on Comment                     
           each comOncom in com.commentsOnComments
             .list-group-item#coms
               p= comOncom.commentOnComment 

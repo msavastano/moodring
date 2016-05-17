@@ -15,17 +15,17 @@ block content
                 optgroup(label="Select Mood")
                   each name, ix in moodMap
                     option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
-          button.btn.btn-default Submit Mood    
+          button.btn.btn-default.btn-sm Submit Mood    
     div.container
       h3 Comments 
-      a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default Comment on Mood      
+      a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Comment on Mood      
       .row.list-group
         each com in currMood.comments
           .list-group-item#coms
             p= com.comment 
             p POSTED BY: #{com.postedBy.username}
                          
-            a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary Comment on Comment 
+            a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Comment on Comment 
                       
             each comOncom in com.commentsOnComments
               .list-group-item#coms
