@@ -2,10 +2,8 @@ extends layout
 
 block content 
   div.container 
-    h1 #{message} #{title}  
-  
-  
-  
+    h1 #{message} #{title} 
+    input(type="hidden", value=nouser, id="nu")  
   div.container
     div.col-xs-12.col-sm-4.mood-div
       h2= lastestFrMood.label

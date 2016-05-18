@@ -2,14 +2,11 @@ var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
 
-//'/:moodid/comment/:commentid/commentoncomment/new'
+// post a new comment on comment
 module.exports.new_comment_on_comment = function(req, res, next){
   Moods.findById(req.params.moodid)
       .exec(function (err, mood){
-
-
-      User.findById(req.params.userid)
-
+        User.findById(req.params.userid)
        .exec(function (err, user){
         if (err) throw err;
         req.body.postedBy = req.decoded._doc._id;
@@ -32,6 +29,7 @@ module.exports.new_comment_on_comment = function(req, res, next){
   });
 };
 
+// get comment on comment screen
 module.exports.index = function(req, res, next){
   Moods.findById(req.params.moodid)
       .exec(function (err, mood){

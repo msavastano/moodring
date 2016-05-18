@@ -13,20 +13,3 @@ function getSecretKey() {
     return process.env.JWT_SECRET;
  }
 };
-
-/*
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
-
-crypto.randomBytes(256, function(ex, buf) {
-  if (ex) throw ex;
-  var token = jwt.sign({foo: 'bar'}, buf);
-  var decoded = jwt.verify(token, buf);
-});
-
-'facebook': {
-    clientID: '1677631512487156',
-    clientSecret: '9be36079f185955082f47705593237ac',
-    callbackURL: 'https://localhost:3443/users/facebook/callback'
-}
-*/

@@ -1,12 +1,11 @@
 $( document ).ready(function() {
     //var  main_controller = require("../../app_server/controllers/main_controller");
     console.log("IN");
+    // This sets the current mood in page
     if(document.getElementById('cm')){
         var currMood = document.getElementById('cm').value;
         $('#moodChoices').val(currMood);
     }
-
-
     $('#firstMoodChoices').val('Select First Mood');
     if(document.getElementById('nu')){
       var nu = document.getElementById('nu').value;
@@ -14,25 +13,22 @@ $( document ).ready(function() {
       if(!nu){
         console.log('notnu')
         $('#logoutid').hide();
+        $('#friendlistid').hide();
+        $('#searchid').hide();
+        $('#oldmoodsid').hide();
+      }else{
+        $('#loginid').hide();
       }
     }
-    /*$('#friend_list_div li button').each(function(){
-      var c = $(this).attr('moodcolor');
-      console.log($(this));
-      console.log($(this).css('backgroundColor'));
-      $(this).css('backgroundColor', c)
-    });*/
 });
 
+// Use later
 var cbc = function changeBackground(color) {
    document.body.style.background = color;
 }
-
 var cfc = function changeFontColor(color) {
    document.body.style.color = color;
 }
-
-
 //    var bgcolor = $(this).attr('hex');
 //    var fontcolor = $(this).attr('fonthex');
 //    var lab = $(this).attr('lab');

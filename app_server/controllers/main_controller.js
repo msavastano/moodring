@@ -4,48 +4,48 @@ var User = require('../models/users');
 var stringify = require('json-stringify-safe');
 var Verify    = require('./verify');
 
-// Homepage
+// User Homepage
 module.exports.index = function(req, res, next) {
 
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    //console.log(err);
     if (err) throw err
     var umoods = user.moods;
     var cm;
     if(umoods.length == 0){
-
+      // render a screen for picking first mood
       res.render('pick_first_mood', { title: 'My mood',
                             message: 'Welcome to',
                             moodMap: moodMap.moods,
                             userid : req.decoded._doc._id,
-                            user : req.decoded._doc.username
+                            user : req.decoded._doc.username,
+                            nouser:req.decoded
                         });
     }else{
-
       umoods.forEach(function(m, i){
         Moods.findById(m)
           .populate('comments.postedBy')
           .populate('comments.commentsOnComments.postedBy')
           .exec(function(err, md){
+          // bug - if no latest mood is found it does nothing
           if(md.latestMood == true){
             cm = md;
-            //console.log(cm.comments);
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
                                   moodMap: moodMap.moods,
                                   user : req.decoded._doc.username,
                                   userid : req.decoded._doc._id,
-                                  currMood : cm
+                                  currMood : cm,
+                                  nouser:req.decoded
                               });
 
         }
       });
-
     });
   }
   });
 };
 
+// This will render the old mood picked from the old moods list
 module.exports.old_mood = function (req, res, next) {
   Moods.findById(req.params.moodid)
   .populate('comments.postedBy')
@@ -53,58 +53,52 @@ module.exports.old_mood = function (req, res, next) {
   .exec(function(err, md){
     res.render('old_mood', { title: 'Old Mood',
                           moodMap: moodMap.moods,
-                          md:md
+                          md:md,
+                          nouser:req.decoded
                       });
 
   });
 };
 
+// this puts together a list of old moods
 module.exports.old_moods = function (req, res, next) {
   User.findById(req['decoded']['_doc']['_id'])
       .populate('moods')
       .exec(function(err, user){
         var oldMoods = [];
-        //console.log(user.moods);
         user.moods.forEach(function(m, i){
-
           if(m.latestMood == false){
             oldMoods.push(m);
           }
-
         });
         res.render('old_moods', { title: 'Old Moods',
                               moodMap: moodMap.moods,
                               user : user,
-                              oMoods:oldMoods
+                              oMoods:oldMoods,
+                              nouser:req.decoded
                           });
   });
 };
 
+// get the search screen
 module.exports.searchFriends = function(req, res, next){
   res.render('search_friends', { title: 'Search Friends',
                         message: 'Welcome to',
                         moodMap: moodMap.moods,
                         user : req.decoded._doc.username,
-                        finds : []
+                        finds : [],
+                        nouser:req.decoded
                     });
 };
 
+// get friends based on search string
 module.exports.findFriends = function(req, res, next){
   var keyword = req.body.friend;
   var matches = [];
-  /*
-    username
-    firstname
-    lastname
-  */
   User.find({}, function(err, users){
-    //console.log(users);
     users.forEach(function(u, i){
-      //console.log(u.username.search(keyword));
       if(u._id != req.decoded._doc._id){
         if(u.username.search(keyword) != -1){
-          //console.log(u.username);
-          //keyword = keyword + " username"
           matches.push(u);
         }else if(u.firstname.search(keyword) != -1){
           matches.push(u);
@@ -113,17 +107,17 @@ module.exports.findFriends = function(req, res, next){
         }
       }
     });
-    //console.log(matches);
     res.render('search_friends', { title: 'Search Friends',
                           message: 'Welcome to',
                           user : req.decoded._doc.username,
                           key : keyword,
-                          finds : matches
+                          finds : matches,
+                          nouser:req.decoded
                       });
   });
-
 };
 
+// Create a new mood
 module.exports.new_mood = function(req, res, next){
   if(req.decoded._doc._id){
     User

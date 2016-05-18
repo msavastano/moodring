@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-//var passportLocalMongoose = require('passport-local-mongoose');
 
 var commentsOnCommentsSchema = new Schema({
     commentOnComment:  {
@@ -49,8 +48,6 @@ var moodSchema = new Schema({
 moodSchema.methods.getName = function() {
     return (this.label);
 };
-
-//moodSchema.plugin(passportLocalMongoose);
 
 var Moods = mongoose.model('Moods', moodSchema, 'moods');
 

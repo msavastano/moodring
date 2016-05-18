@@ -3,13 +3,12 @@ var Verify = require('./verify');
 var User = require('../models/users');
 var stringify = require('json-stringify-safe');
 
-
+// add a friend button
 module.exports.addFriend =  function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-
+    // if user id determine what it does
     if(user.friends.indexOf(req.params.friendid) == -1){
       if(err) throw err
-      //console.log(req.params.friendid);
       user.friends.push(req.params.friendid);
     }else{
       user.friends.pop(req.params.friendid);
@@ -21,7 +20,7 @@ module.exports.addFriend =  function(req, res, next) {
 
 };
 
-// Friend Page
+// get the Friend Page
 module.exports.index = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'])
     .populate('friends')
@@ -35,6 +34,7 @@ module.exports.index = function(req, res, next) {
           console.log(friendBtn);
         });
         var friendBtnStr = "";
+        // if user id determine what is on button
         if(friendBtn){
           friendBtnStr = "Remove Friend";
         }else{
@@ -51,14 +51,14 @@ module.exports.index = function(req, res, next) {
           .exec(function(err, md){
             if(md.latestMood == true){
               cm = md;
-              //console.log(cm);
               res.render('friend', { title: friend.username+'\'s Page',
                                     message: 'Welcome to',
                                     moodMap: moodMap.moods,
                                     user : req.decoded._doc.username,
                                     fr : friend,
                                     lastestFrMood : cm,
-                                    frBtnStr : friendBtnStr
+                                    frBtnStr : friendBtnStr,
+                                    nouser:req.decoded
                                 });
             }
         });

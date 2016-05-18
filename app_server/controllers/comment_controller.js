@@ -2,21 +2,22 @@ var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
 
+// get comment screen
 module.exports.index = function(req, res, next) {
   Moods.findById(req.params.moodid)
    .exec(function (err, mood){
      User.findById(req.params.userid)
       .exec(function (err, user){
-
-    res.render('comment', { title: 'Comment',
-                        message: 'Welcome to',
-                        mood:mood,
-                        user:user
-                      });
+        res.render('comment', { title: 'Comment',
+                            message: 'Welcome to',
+                            mood:mood,
+                            user:user
+                          });
     });
   });
 };
 
+// post a new comment 
 module.exports.new_comment = function(req, res, next){
   Moods.findById(req.params.moodid, function (err, mood){
     User.findById(req.params.userid)
