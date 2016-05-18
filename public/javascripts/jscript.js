@@ -1,5 +1,4 @@
-$( document ).ready(function() {
-    //var  main_controller = require("../../app_server/controllers/main_controller");
+$( document ).ready(function() {    
     console.log("IN");
     // This sets the current mood in page
     if(document.getElementById('cm')){
@@ -7,6 +6,7 @@ $( document ).ready(function() {
         $('#moodChoices').val(currMood);
     }
     $('#firstMoodChoices').val('Select First Mood');
+    // Control tab buttons by user logged in or not
     if(document.getElementById('nu')){
       var nu = document.getElementById('nu').value;
       console.log(nu);
