@@ -4,12 +4,12 @@ block content
   
   h1 #{title}  
   
-  div.container
-    p= md.label
+  div.container.mood-div
+    h2= md.label
     p Mood began #{md.createdAt}
     
   div.container
-    h3 Comments 
+    h3 Rings 
     
     .row
       .row.list-group
@@ -17,9 +17,6 @@ block content
           .list-group-item#coms
             p= com.comment 
             p POSTED BY: #{com.postedBy.username}
-            
-            
-                      
             each comOncom in com.commentsOnComments
               .list-group-item#coms
                 p= comOncom.commentOnComment 

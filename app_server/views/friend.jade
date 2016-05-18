@@ -8,7 +8,7 @@ block content
   
   div.container
     div.col-xs-12.col-sm-4.mood-div
-      p= lastestFrMood.label
+      h2= lastestFrMood.label
   
   div.container
     form.form-horizontal(action="", method="post", role="form", id="add_friend")
@@ -17,7 +17,7 @@ block content
       button.btn.btn-default.btn-sm #{frBtnStr} 
     
   div.container
-    h3 Comments 
+    h3 Rings 
     a(href="/"+lastestFrMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
     
     .row.list-group

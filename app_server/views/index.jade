@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  div.container
+  div.container-fluid
     h1 (#{user})
     p #{message} #{title} 
     
@@ -17,9 +17,9 @@ block content
                   option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
         button.btn.btn-default.btn-sm Submit Mood    
   div.container-fluid
-    h3 Comments 
+    h3 Rings 
     a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Ring on Mood  
-    .div.col-xs-12    
+    div.col-xs-12    
       .row.list-group
         each com in currMood.comments
           .list-group-item#coms
@@ -27,10 +27,10 @@ block content
             p POSTED BY: #{com.postedBy.username}
                          
             a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Ring on Ring 
-                      
-            each comOncom in com.commentsOnComments
-              .list-group-item#coms
-                p= comOncom.commentOnComment 
-                p POSTED BY: #{comOncom.postedBy.username}               
+            div          
+              each comOncom in com.commentsOnComments
+                .list-group-item#coms
+                  p= comOncom.commentOnComment 
+                  p POSTED BY: #{comOncom.postedBy.username}               
                   
           

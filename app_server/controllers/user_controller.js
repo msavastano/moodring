@@ -98,13 +98,16 @@ module.exports.logout =  function(req, res) {
 module.exports.login_page = function(req, res, next){
   console.log("login_page");
   res.render('login', { title: 'Login',
-                        message: 'Welcome'});
+                        message: 'Welcome',
+                        nouser:req.decoded
+                      });
 };
 
 module.exports.register_page = function(req, res, next){
   console.log("register_page");
   res.render('register', { title: 'New Registration',
-                        message: 'Welcome to',
-                      passwordError:''
-                    });
+                          message: 'Welcome to',
+                          passwordError:'',
+                          nouser:req.decoded
+                        });
 };

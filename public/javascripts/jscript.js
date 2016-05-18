@@ -1,9 +1,21 @@
 $( document ).ready(function() {
     //var  main_controller = require("../../app_server/controllers/main_controller");
     console.log("IN");
-    var currMood = document.getElementById('cm').value;
-    $('#moodChoices').val(currMood);
+    if(document.getElementById('cm')){
+        var currMood = document.getElementById('cm').value;
+        $('#moodChoices').val(currMood);
+    }
+
+
     $('#firstMoodChoices').val('Select First Mood');
+    if(document.getElementById('nu')){
+      var nu = document.getElementById('nu').value;
+      console.log(nu);
+      if(!nu){
+        console.log('notnu')
+        $('#logoutid').hide();
+      }
+    }
     /*$('#friend_list_div li button').each(function(){
       var c = $(this).attr('moodcolor');
       console.log($(this));
