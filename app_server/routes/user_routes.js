@@ -13,13 +13,17 @@ router.post('/register', ctrlUser.register_user);
 /*GET registration page*/
 router.get('/register', ctrlUser.register_page);
 
-
-
 /*POST login credentials*/
 router.post('/login', ctrlUser.login_user);
 
 /*GET login page*/
 router.get('/login', ctrlUser.login_page);
+
+/*POST upload pic*/
+router.post('/photo', ctrlUser.photo_upload);
+
+/*GET photo page*/
+router.get('/photo', ctrlUser.photo_page);
 
 /*GET login page*/
 router.get('/logout', ctrlUser.logout);

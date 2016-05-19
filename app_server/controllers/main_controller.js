@@ -26,8 +26,10 @@ module.exports.index = function(req, res, next) {
           .populate('comments.postedBy')
           .populate('comments.commentsOnComments.postedBy')
           .exec(function(err, md){
+          var foundOldMood = false;
           // bug - if no latest mood is found it does nothing
           if(md.latestMood == true){
+            foundOldMood = true
             cm = md;
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
@@ -37,11 +39,10 @@ module.exports.index = function(req, res, next) {
                                   currMood : cm,
                                   nouser:req.decoded
                               });
-
         }
       });
     });
-  }
+   }
   });
 };
 
