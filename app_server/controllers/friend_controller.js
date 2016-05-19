@@ -10,12 +10,8 @@ module.exports.addFriend =  function(req, res, next) {
     var indexFriend = user.friends.indexOf(req.params.friendid)
     if(indexFriend == -1){
       if(err) throw err
-      console.log("added");
-      console.log(req.params.friendid);
       user.friends.push(req.params.friendid);
     }else{
-      console.log("removed");
-      console.log(req.params.friendid);
       user.friends.splice(indexFriend, 1);
     }
     user.save(function(err,user) {
@@ -33,10 +29,7 @@ module.exports.index = function(req, res, next) {
       User.findById(req.params.friendid, function(err, friend){
         var friendBtn = false;
         user.friends.forEach(function(f, i){
-          //console.log(f._id);
-          //console.log(friend._id);
           if(String(f._id) == String(friend._id)) friendBtn = true;
-          //console.log(friendBtn);
         });
         var friendBtnStr = "";
         // if user id determine what is on button
@@ -44,8 +37,7 @@ module.exports.index = function(req, res, next) {
           friendBtnStr = "Remove Friend";
         }else{
           friendBtnStr = "Add Friend";
-        }
-        //console.log(friendBtnStr);
+        }        
         if (err) throw err
         var fmoods = friend.moods;
         var cm;
