@@ -3,6 +3,7 @@ var Verify = require('./verify');
 var User = require('../models/users');
 var stringify = require('json-stringify-safe');
 var Verify    = require('./verify');
+var moodmapper = require('./moodmapper');
 
 // User Homepage
 module.exports.index = function(req, res, next) {
@@ -15,12 +16,13 @@ module.exports.index = function(req, res, next) {
       // render a screen for picking first mood
       res.render('pick_first_mood', { title: 'My mood',
                             message: 'Welcome to',
-                            moodMap: moodMap.moods,
+                            moodMap: moodmapper.moodMap.moods,
                             userid : req.decoded._doc._id,
                             user : req.decoded._doc.username,
                             nouser:req.decoded
                         });
     }else{
+      console.log(moodmapper.moodMap.moods);
       umoods.forEach(function(m, i){
         Moods.findById(m)
           .populate('comments.postedBy')
@@ -33,7 +35,7 @@ module.exports.index = function(req, res, next) {
             cm = md;
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
-                                  moodMap: moodMap.moods,
+                                  moodMap: moodmapper.moodMap.moods,
                                   user : req.decoded._doc.username,
                                   userid : req.decoded._doc._id,
                                   currMood : cm,
@@ -53,7 +55,7 @@ module.exports.old_mood = function (req, res, next) {
   .populate('comments.commentsOnComments.postedBy')
   .exec(function(err, md){
     res.render('old_mood', { title: 'Old Mood',
-                          moodMap: moodMap.moods,
+                          moodMap: moodmapper.moodMap.moods,
                           md:md,
                           nouser:req.decoded
                       });
@@ -73,7 +75,7 @@ module.exports.old_moods = function (req, res, next) {
           }
         });
         res.render('old_moods', { title: 'Old Moods',
-                              moodMap: moodMap.moods,
+                              moodMap: moodmapper.moodMap.moods,
                               user : user,
                               oMoods:oldMoods,
                               nouser:req.decoded
@@ -85,7 +87,7 @@ module.exports.old_moods = function (req, res, next) {
 module.exports.searchFriends = function(req, res, next){
   res.render('search_friends', { title: 'Search Friends',
                         message: 'Welcome to',
-                        moodMap: moodMap.moods,
+                        moodMap:moodmapper.moodMap.moods,
                         user : req.decoded._doc.username,
                         finds : [],
                         nouser:req.decoded
@@ -157,57 +159,4 @@ module.exports.new_mood = function(req, res, next){
 var sendJSONresponse = function(res, status, content) {
   res.status(status);
   res.json(content);
-};
-
-var moodMap = {
-  moods:
-    [{
-        label:'Stressed',
-        colorHex:'#000000',
-        colorName:'black',
-        fontHex:'#ffffff'
-    },
-    {
-        label:'Nervous',
-        colorHex:'#cd1b18',
-        colorName:'red',
-        fontHex:'#000000'
-    },
-   {
-        label:'Unsettled',
-        colorHex:'#cd6718',
-        colorName:'orange',
-        fontHex:'#000000'
-    },
-    {
-        label:'Active',
-        colorHex:'#1db715',
-        colorName:'green',
-        fontHex:'#000000'
-    },
-    {
-        label:'Relaxed',
-        colorHex:'#15acb7',
-        colorName:'light-blue',
-        fontHex:'#000000'
-    },
-    {
-        label:'Lovable',
-        colorHex:'#15b773',
-        colorName:'blue-green',
-        fontHex:'#000000'
-    },
-    {
-        label:'Romantic',
-        colorHex:'#180f80',
-        colorName:'dark-blue',
-        fontHex:'#ffffff'
-    },
-    {
-        label:'Happy',
-        colorHex:'#f6b1b1',
-        colorName:'pink',
-        fontHex:'#000000'
-    }
-  ]
 };

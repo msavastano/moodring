@@ -2,6 +2,8 @@ var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
 var stringify = require('json-stringify-safe');
+var moodmapper = require('./moodmapper');
+
 
 // add a friend button
 module.exports.addFriend =  function(req, res, next) {
@@ -37,7 +39,7 @@ module.exports.index = function(req, res, next) {
           friendBtnStr = "Remove Friend";
         }else{
           friendBtnStr = "Add Friend";
-        }        
+        }
         if (err) throw err
         var fmoods = friend.moods;
         var cm;
@@ -50,7 +52,7 @@ module.exports.index = function(req, res, next) {
               cm = md;
               res.render('friend', { title: friend.username+'\'s Page',
                                     message: 'Welcome to',
-                                    moodMap: moodMap.moods,
+                                    moodMap: moodmapper.moodMap.moods,
                                     user : req.decoded._doc.username,
                                     fr : friend,
                                     lastestFrMood : cm,
@@ -62,57 +64,4 @@ module.exports.index = function(req, res, next) {
       });
     });
   });
-};
-
-var moodMap = {
-  moods:
-    [{
-        label:'Stressed',
-        colorHex:'#000000',
-        colorName:'black',
-        fontHex:'#ffffff'
-    },
-    {
-        label:'Nervous',
-        colorHex:'#cd1b18',
-        colorName:'red',
-        fontHex:'#000000'
-    },
-   {
-        label:'Unsettled',
-        colorHex:'#cd6718',
-        colorName:'orange',
-        fontHex:'#000000'
-    },
-    {
-        label:'Active',
-        colorHex:'#1db715',
-        colorName:'green',
-        fontHex:'#000000'
-    },
-    {
-        label:'Relaxed',
-        colorHex:'#15acb7',
-        colorName:'light-blue',
-        fontHex:'#000000'
-    },
-    {
-        label:'Lovable',
-        colorHex:'#15b773',
-        colorName:'blue-green',
-        fontHex:'#000000'
-    },
-    {
-        label:'Romantic',
-        colorHex:'#180f80',
-        colorName:'dark-blue',
-        fontHex:'#ffffff'
-    },
-    {
-        label:'Happy',
-        colorHex:'#f6b1b1',
-        colorName:'pink',
-        fontHex:'#000000'
-    }
-  ]
 };
