@@ -18,12 +18,8 @@ $( document ).ready(function() {
         $('#oldmoodsid').hide();
       }else{
         $('#loginid').hide();
-      }
+      }      
     }
-    //$('#friendButton').click(function(){
-      //alert('fr button clicked');
-      //$(this).fadeOut('slow').fadeIn('slow');
-    //});
 });
 
 // Use later
