@@ -17,7 +17,7 @@ module.exports.addFriend =  function(req, res, next) {
       user.friends.splice(indexFriend, 1);
     }
     user.save(function(err,user) {
-      res.redirect('/friend/'+req.params.friendid);
+      res.redirect('/friend/'+req.params.friendid);      
     });
   });
 

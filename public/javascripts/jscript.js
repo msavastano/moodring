@@ -1,4 +1,4 @@
-$( document ).ready(function() {    
+$( document ).ready(function() {
     console.log("IN");
     // This sets the current mood in page
     if(document.getElementById('cm')){
@@ -20,6 +20,10 @@ $( document ).ready(function() {
         $('#loginid').hide();
       }
     }
+    //$('#friendButton').click(function(){
+      //alert('fr button clicked');
+      //$(this).fadeOut('slow').fadeIn('slow');
+    //});
 });
 
 // Use later
