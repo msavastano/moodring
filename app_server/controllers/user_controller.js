@@ -29,7 +29,16 @@ module.exports.register_user = function(req, res, next){
               }
               user.save(function(err,user) {
                   passport.authenticate('local')(req, res, function () {
-                      res.redirect('/users/login');
+                      //res.redirect('/users/login');
+                      req.logIn(user, function(err) {
+                        if (err) {
+                          res.redirect('/users/login');
+                        }
+                        var token = Verify.getToken(user);
+                        res.cookie('auth',token);
+
+                        res.redirect('/');
+                      });
                   });
               });
             }
