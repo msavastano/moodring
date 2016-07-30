@@ -3,10 +3,19 @@ extends layout
 block content 
   div.container 
     h1 #{message} #{title} 
-    input(type="hidden", value=nouser, id="nu")  
+    input(type="hidden", value=nouser, id="nu") 
+     
+    
   div.container
-    div.col-xs-12.col-sm-4.mood-div
-      h2= lastestFrMood.label
+    .row
+      .col-md-4.mood-div
+        h2= lastestFrMood.label
+      .col-md-4.col-md-push-4
+        img.profile_image.img-rounded(src="../"+userpic)
+       
+  //div.container
+    //div.col-xs-12.col-sm-4.mood-div
+      //h2= lastestFrMood.label
   
   div.container
     form.form-horizontal(action="", method="post", role="form", id="add_friend")

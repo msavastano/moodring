@@ -2,13 +2,13 @@ extends layout
 
 block content
   div.container-fluid
-    h1 (#{user})
-    p #{message} #{title} 
+    h1 Welcome Back, #{user}!    
     input(type="hidden", value=nouser, id="nu")  
   
     div.container-fluid
       .div.col-xs-12.col-sm-4
-         img.img-rounded.pull-xs-left(src=userpic)
+         a(href="/image")
+          img.profile_image.img-rounded.pull-xs-left(src=userpic)
     
   div.container-fluid
     .div.col-xs-12.col-sm-4.mood-div

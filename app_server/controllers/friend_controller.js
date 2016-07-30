@@ -17,7 +17,7 @@ module.exports.addFriend =  function(req, res, next) {
       user.friends.splice(indexFriend, 1);
     }
     user.save(function(err,user) {
-      res.redirect('/friend/'+req.params.friendid);      
+      res.redirect('/friend/'+req.params.friendid);
     });
   });
 
@@ -57,7 +57,8 @@ module.exports.index = function(req, res, next) {
                                     fr : friend,
                                     lastestFrMood : cm,
                                     frBtnStr : friendBtnStr,
-                                    nouser:req.decoded
+                                    nouser:req.decoded,
+                                    userpic:friend.pic
                                 });
             }
         });

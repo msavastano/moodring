@@ -3,3 +3,4 @@ cf
 newrelic.js
 uploads/*
 !*.gitkeep
+!hf.jpg

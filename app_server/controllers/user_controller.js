@@ -28,6 +28,7 @@ module.exports.register_user = function(req, res, next){
               if(req.body.lastname) {
                   user.lastname = req.body.lastname;
               }
+              user.pic = 'uploads/hf.jpg';
               user.save(function(err,user) {
                   passport.authenticate('local')(req, res, function () {
                       //res.redirect('/users/login');
@@ -37,7 +38,6 @@ module.exports.register_user = function(req, res, next){
                         }
                         var token = Verify.getToken(user);
                         res.cookie('auth',token);
-
                         res.redirect('/');
                       });
                   });
