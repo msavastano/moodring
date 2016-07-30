@@ -30,6 +30,10 @@ module.exports.index = function(req, res, next) {
     .exec(function(err, user){
       User.findById(req.params.friendid, function(err, friend){
         var friendBtn = false;
+        var friendpic = friend.pic;
+        if(friend.pic === ''){
+          friendpic = 'uploads/hf.jpg'
+        }
         user.friends.forEach(function(f, i){
           if(String(f._id) == String(friend._id)) friendBtn = true;
         });
@@ -58,7 +62,7 @@ module.exports.index = function(req, res, next) {
                                     lastestFrMood : cm,
                                     frBtnStr : friendBtnStr,
                                     nouser:req.decoded,
-                                    userpic:friend.pic
+                                    userpic:friendpic
                                 });
             }
         });
