@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var Verify = require('../controllers/verify');
-
+var multer = require('multer');
 var ctrlMain = require('../controllers/main_controller');
 var ctrlFriendPage = require('../controllers/friend_controller');
 var ctrlFriendList = require('../controllers/friend_list_controller');
 var ctrlComment = require('../controllers/comment_controller');
 var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller');
+
+var upload = multer({ dest: './uploads' });
+
+router.post('/image', Verify.verifyOrdinaryUser, upload.single('avatar'), ctrlMain.image_upload);
+
+router.get('/image', Verify.verifyOrdinaryUser, ctrlMain.get_image_page);
 
 /* GET Old Moods page. */
 router.get('/oldmoods', Verify.verifyOrdinaryUser, ctrlMain.old_moods);

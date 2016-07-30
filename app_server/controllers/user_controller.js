@@ -8,6 +8,7 @@ var User = require('../models/users');
 var request = require('request');
 var fs = require('fs');
 
+
 // save user to DB
 module.exports.register_user = function(req, res, next){
   console.log("register_user");
@@ -74,31 +75,6 @@ module.exports.login_user = function(req, res, next){
       });
     }
   })(req,res,next);
-};
-
-module.exports.photo_page = function(req, res, next){
-  res.render('photo', { title: 'Login',
-                        message: 'Username or Password is incorrect'});
-};
-
-module.exports.photo_upload = function(req, res, next){
-  console.log(req);
-  fs.readFile(req.files.image.path, function (err, data) {
-    var imageName = req.files.image.name
-    // If there's an error
-    if(!imageName){
-      console.log("There was an error")
-      res.redirect("/");
-      res.end();
-    } else {
-      var newPath = __dirname + "/uploads/fullsize/" + imageName;
-      // write file to uploads/fullsize folder
-      fs.writeFile(newPath, data, function (err) {
-        // let's see it
-        res.redirect("/uploads/fullsize/" + imageName);
-      });
-    }
-  });
 };
 
 // clear the cookie that holds token

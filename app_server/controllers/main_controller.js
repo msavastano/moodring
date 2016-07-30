@@ -5,6 +5,42 @@ var stringify = require('json-stringify-safe');
 var Verify    = require('./verify');
 var moodmapper = require('./moodmapper');
 
+
+module.exports.get_image_page = function(req, res, next) {
+  res.render('image', {});
+};
+
+module.exports.image_upload = function(req, res, next) {
+  User.findById(req['decoded']['_doc']['_id'], function(err, user){
+    console.log(user);
+    console.log(req.file.path);
+    user.pic = req.file.path;
+    user.save(function(err, user){
+      //res.redirect('/');
+    });
+    console.log(user);
+  });
+  console.log(req.body); //form fields
+	/* example output:
+	{ title: 'abc' }
+	 */
+	console.log(req.file); //form files
+	/* example output:
+            { fieldname: 'upl',
+              originalname: 'grumpy.png',
+              encoding: '7bit',
+              mimetype: 'image/png',
+              destination: './uploads/',
+              filename: '436ec561793aa4dc475a88e84776b1b9',
+              path: 'uploads/436ec561793aa4dc475a88e84776b1b9',
+              size: 277056 }
+	 */
+	res.status(204).end();
+};
+
+
+
+
 // User Homepage
 module.exports.index = function(req, res, next) {
 
@@ -12,17 +48,19 @@ module.exports.index = function(req, res, next) {
     if (err) throw err
     var umoods = user.moods;
     var cm;
+    console.log("pic = "+user.pic);
     if(umoods.length == 0){
       // render a screen for picking first mood
       res.render('pick_first_mood', { title: 'My mood',
                             message: 'Welcome to',
                             moodMap: moodmapper.moodMap.moods,
                             userid : req.decoded._doc._id,
-                            user : req.decoded._doc.username,
-                            nouser:req.decoded
+                            user : user.username,
+                            nouser:req.decoded,
+                            userpic:user.pic
                         });
     }else{
-      console.log(moodmapper.moodMap.moods);
+      //console.log(moodmapper.moodMap.moods);
       umoods.forEach(function(m, i){
         Moods.findById(m)
           .populate('comments.postedBy')
@@ -39,7 +77,8 @@ module.exports.index = function(req, res, next) {
                                   user : req.decoded._doc.username,
                                   userid : req.decoded._doc._id,
                                   currMood : cm,
-                                  nouser:req.decoded
+                                  nouser:req.decoded,
+                                  userpic:user.pic
                               });
         }
       });

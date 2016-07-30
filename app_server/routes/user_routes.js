@@ -2,10 +2,9 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
 var Users = require('../models/users');
-
 var ctrlUser = require('../controllers/user_controller');
+
 
 /*POST registration info*/
 router.post('/register', ctrlUser.register_user);
@@ -18,12 +17,6 @@ router.post('/login', ctrlUser.login_user);
 
 /*GET login page*/
 router.get('/login', ctrlUser.login_page);
-
-/*POST upload pic*/
-router.post('/photo', ctrlUser.photo_upload);
-
-/*GET photo page*/
-router.get('/photo', ctrlUser.photo_page);
 
 /*GET login page*/
 router.get('/logout', ctrlUser.logout);
