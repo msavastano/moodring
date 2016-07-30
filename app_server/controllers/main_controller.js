@@ -19,7 +19,7 @@ module.exports.image_upload = function(req, res, next) {
     user.save(function(err, user){
       res.redirect('/');
     });
-    //res.redirect('/');    
+    //res.redirect('/');
   });
 };
 
@@ -34,6 +34,10 @@ module.exports.index = function(req, res, next) {
     var umoods = user.moods;
     var cm;
     console.log("pic = "+user.pic);
+    var upic = user.pic;
+    if(user.pic === ''){
+      upic = 'uploads/hf.jpg';
+    }
     if(umoods.length == 0){
       // render a screen for picking first mood
       res.render('pick_first_mood', { title: 'My mood',
@@ -42,7 +46,7 @@ module.exports.index = function(req, res, next) {
                             userid : req.decoded._doc._id,
                             user : user.username,
                             nouser:req.decoded,
-                            userpic:user.pic
+                            userpic:upic
                         });
     }else{
       //console.log(moodmapper.moodMap.moods);
@@ -63,7 +67,7 @@ module.exports.index = function(req, res, next) {
                                   userid : req.decoded._doc._id,
                                   currMood : cm,
                                   nouser:req.decoded,
-                                  userpic:user.pic
+                                  userpic:upic
                               });
         }
       });

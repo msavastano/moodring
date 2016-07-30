@@ -32,7 +32,7 @@ module.exports.index = function(req, res, next) {
         var friendBtn = false;
         var friendpic = friend.pic;
         if(friend.pic === ''){
-          friendpic = 'uploads/hf.jpg'
+          friendpic = 'uploads/hf.jpg';
         }
         user.friends.forEach(function(f, i){
           if(String(f._id) == String(friend._id)) friendBtn = true;
