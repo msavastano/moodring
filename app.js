@@ -40,14 +40,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));
 
 
-if (app.get('env') === 'development') {
+/*if (app.get('env') === 'development') {
   app.use('/uploads', express.static('uploads'));
 }else{
   app.use(CLOUDINARY_URL, express.static('uploads'));
-}
+}*/
 
 
 //cloudinary://172876477385526:qOcWAl_HRp7OgzdhSGOIuBKTPHM@hc8sjgb90
