@@ -14,7 +14,6 @@ require('./app_server/models/db');
 
 var routes = require('./app_server/routes/index');
 var users = require('./app_server/routes/user_routes');
-//var uploads = require('./uploads');
 
 var app = express();
 
@@ -38,12 +37,20 @@ passport.deserializeUser(Users.deserializeUser());
 
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.static(path.join(__dirname,'uploads')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/uploads', express.static('uploads'));
+//app.use('/uploads', express.static('uploads'));
 
+
+if (app.get('env') === 'development') {
+  app.use('/uploads', express.static('uploads'));
+}else{
+  app.use(CLOUDINARY_URL, express.static('uploads'));
+}
+
+
+//cloudinary://172876477385526:qOcWAl_HRp7OgzdhSGOIuBKTPHM@hc8sjgb90
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
