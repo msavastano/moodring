@@ -4,3 +4,4 @@ newrelic.js
 uploads/*
 !*.gitkeep
 !hf.jpg
+cloudin.js

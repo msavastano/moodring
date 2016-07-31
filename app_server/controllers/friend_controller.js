@@ -32,7 +32,7 @@ module.exports.index = function(req, res, next) {
         var friendBtn = false;
         var friendpic = friend.pic;
         if(friend.pic === ''){
-          friendpic = 'uploads/hf.jpg';
+          friendpic = 'http://res.cloudinary.com/hc8sjgb90/image/upload/v1469932937/ddgx83q76t8fqcdwhssg.jpg';
         }
         user.friends.forEach(function(f, i){
           if(String(f._id) == String(friend._id)) friendBtn = true;

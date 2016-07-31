@@ -28,7 +28,7 @@ module.exports.register_user = function(req, res, next){
               if(req.body.lastname) {
                   user.lastname = req.body.lastname;
               }
-              user.pic = 'uploads/hf.jpg';
+              user.pic = 'http://res.cloudinary.com/hc8sjgb90/image/upload/v1469932937/ddgx83q76t8fqcdwhssg.jpg';
               user.save(function(err,user) {
                   passport.authenticate('local')(req, res, function () {
                       //res.redirect('/users/login');

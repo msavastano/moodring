@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var authenticate = require('./authenticate');
 var LocalStrategy = require('passport-local').Strategy;
+var cloudinary = require('cloudinary');
+var cloudin = require('./cloudin');
 
 require('./app_server/models/db');
 
@@ -42,15 +44,20 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/uploads', express.static('uploads'));
 
-
-/*if (app.get('env') === 'development') {
-  app.use('/uploads', express.static('uploads'));
+if (app.get('env') === 'development') {
+  cloudinary.config({
+    cloud_name: cloudin.cloud_name,
+    api_key: cloudin.api_key,
+    api_secret: cloudin.api_secret
+  });
 }else{
-  app.use(CLOUDINARY_URL, express.static('uploads'));
-}*/
+  cloudinary.config({
+    cloud_name: CLOUD_NAME,
+    api_key: CLOUD_API_KEY,
+    api_secret: CLOUD_API_SECRET
+  });
+}
 
-
-//cloudinary://172876477385526:qOcWAl_HRp7OgzdhSGOIuBKTPHM@hc8sjgb90
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

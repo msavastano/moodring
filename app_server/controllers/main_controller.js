@@ -4,6 +4,7 @@ var User = require('../models/users');
 var stringify = require('json-stringify-safe');
 var Verify    = require('./verify');
 var moodmapper = require('./moodmapper');
+var cloudinary = require('cloudinary');
 
 
 module.exports.get_image_page = function(req, res, next) {
@@ -11,7 +12,7 @@ module.exports.get_image_page = function(req, res, next) {
   });
 };
 
-module.exports.image_upload = function(req, res, next) {
+/*module.exports.image_upload = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
     console.log(user);
     console.log(req.file.path);
@@ -20,6 +21,18 @@ module.exports.image_upload = function(req, res, next) {
       res.redirect('/');
     });
     //res.redirect('/');
+  });
+};*/
+
+module.exports.image_cl_upload = function(req, res, next) {
+  User.findById(req['decoded']['_doc']['_id'], function(err, user){
+    var stream = cloudinary.uploader.upload(req.file.path, function(result) {
+      console.log(result);
+      user.pic = result.url;
+      user.save(function(err, user){
+        res.redirect('/');
+      });
+    });
   });
 };
 
@@ -36,7 +49,7 @@ module.exports.index = function(req, res, next) {
     console.log("pic = "+user.pic);
     var upic = user.pic;
     if(user.pic === ''){
-      upic = 'uploads/hf.jpg';
+      upic = 'http://res.cloudinary.com/hc8sjgb90/image/upload/v1469932937/ddgx83q76t8fqcdwhssg.jpg';
     }
     if(umoods.length == 0){
       // render a screen for picking first mood

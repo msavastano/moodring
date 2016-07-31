@@ -7,10 +7,18 @@ var ctrlFriendPage = require('../controllers/friend_controller');
 var ctrlFriendList = require('../controllers/friend_list_controller');
 var ctrlComment = require('../controllers/comment_controller');
 var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller');
-
 var upload = multer({ dest: './uploads' });
+var stringify = require('json-stringify-safe');
 
-router.post('/image', Verify.verifyOrdinaryUser, upload.single('avatar'), ctrlMain.image_upload);
+//router.post('/image', upload.single('avatar'), function(req, res, next) {
+  //console.log("REQ FILES = "+req.file.path);
+  //var stream = cloudinary.uploader.upload(req.file.path, function(result) {
+    //console.log(result);
+    //res.redirect('/');
+  //});
+//});
+
+router.post('/image', Verify.verifyOrdinaryUser, upload.single('avatar'), ctrlMain.image_cl_upload);
 
 router.get('/image', Verify.verifyOrdinaryUser, ctrlMain.get_image_page);
 
