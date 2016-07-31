@@ -9,7 +9,7 @@ var passport = require('passport');
 var authenticate = require('./authenticate');
 var LocalStrategy = require('passport-local').Strategy;
 var cloudinary = require('cloudinary');
-var cloudin = require('./cloudin');
+
 
 require('./app_server/models/db');
 
@@ -45,6 +45,7 @@ app.use('/users', users);
 app.use('/uploads', express.static('uploads'));
 
 if (app.get('env') === 'development') {
+  var cloudin = require('./cloudin');
   cloudinary.config({
     cloud_name: cloudin.cloud_name,
     api_key: cloudin.api_key,
