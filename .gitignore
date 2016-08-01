@@ -5,3 +5,4 @@ uploads/*
 !*.gitkeep
 !hf.jpg
 cloudin.js
+sendgrid.js

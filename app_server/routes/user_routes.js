@@ -21,4 +21,13 @@ router.get('/login', ctrlUser.login_page);
 /*GET login page*/
 router.get('/logout', ctrlUser.logout);
 
+router.post('/forgot', ctrlUser.forgot);
+
+router.get('/forgot', ctrlUser.get_forgot);
+
+router.get('/reset/:token', ctrlUser.get_reset);
+
+router.post('/reset/:token', ctrlUser.reset);
+
+
 module.exports = router;

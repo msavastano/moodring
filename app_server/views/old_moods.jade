@@ -1,5 +1,7 @@
 extends layout
 
+include _includes/sharedHTMLfunctions
+
 block content
   div
     h1= title
@@ -10,5 +12,7 @@ block content
         each mood in oMoods
           .list-group-item
             p= mood.label
-            p= mood.createdAt
+            //p= mood.createdAt
+            p 
+             +formatDate(mood.createdAt)
             a(href="/oldmoods/"+mood._id).btn.btn-primary.btn-sm Go to old mood

@@ -7,6 +7,8 @@ var User = new Schema({
     username: {
       type: String
     },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     password: {
       type: String
     },
@@ -29,7 +31,7 @@ var User = new Schema({
       index: true,
       unique: true,
       required: true,
-      uniqueCaseInsensitive: true 
+      uniqueCaseInsensitive: true
     },
     admin:   {
         type: Boolean,

@@ -5,6 +5,7 @@ var stringify = require('json-stringify-safe');
 var Verify    = require('./verify');
 var moodmapper = require('./moodmapper');
 var cloudinary = require('cloudinary');
+var dateFormat = require('dateformat');
 
 
 module.exports.get_image_page = function(req, res, next) {
@@ -72,6 +73,7 @@ module.exports.index = function(req, res, next) {
           // bug - if no latest mood is found it does nothing
           if(md.latestMood == true){
             foundOldMood = true
+            var date = dateFormat(md.createdAt, "fullDate")
             cm = md;
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
@@ -80,7 +82,8 @@ module.exports.index = function(req, res, next) {
                                   userid : req.decoded._doc._id,
                                   currMood : cm,
                                   nouser:req.decoded,
-                                  userpic:upic
+                                  userpic:upic,
+                                  date:date
                               });
         }
       });
@@ -95,10 +98,12 @@ module.exports.old_mood = function (req, res, next) {
   .populate('comments.postedBy')
   .populate('comments.commentsOnComments.postedBy')
   .exec(function(err, md){
+    var date = dateFormat(md.createdAt, "fullDate")
     res.render('old_mood', { title: 'Old Mood',
                           moodMap: moodmapper.moodMap.moods,
                           md:md,
-                          nouser:req.decoded
+                          nouser:req.decoded,
+                          date:date
                       });
 
   });

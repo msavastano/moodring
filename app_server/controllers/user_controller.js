@@ -1,4 +1,5 @@
 var express = require('express');
+var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -7,7 +8,114 @@ var Verify    = require('./verify');
 var User = require('../models/users');
 var request = require('request');
 var fs = require('fs');
+var nodemailer = require('nodemailer');
+var smtpTransport = require("nodemailer-smtp-transport")
+var bcrypt = require('bcrypt-nodejs');
+var async = require('async');
+var crypto = require('crypto');
 
+module.exports.get_forgot = function(req, res) {
+  res.render('forgot', {
+    user: req.user
+  });
+}
+
+module.exports.reset = function(req, res){
+
+    User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      if (!user) {
+        req.flash('error', 'Password reset token is invalid or has expired.');
+        return res.redirect('back');
+      }
+      if(req.body.password == req.body.confirm){
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpires = undefined;
+        user.setPassword(req.body.password, function(err, user) {
+          user.save(function(err) {
+            res.redirect('/users/login');
+          });
+        });
+      }else{
+        res.render('reset', {
+              passwordError: 'passwords do not match'
+        });
+      }
+    });
+}
+
+module.exports.get_reset = function(req, res) {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      req.flash('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/users/forgot');
+    }
+    res.render('reset', {
+      passwordError: '',
+      user: req.user
+    });
+  });
+}
+
+module.exports.forgot = function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+          req.flash('error', 'No account with that email address exists.');
+          return res.redirect('/users/login');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      var sgriduser;
+      var sgridpass;
+      if (app.get('env') === 'development') {
+        var sg = require('../../sendgrid');
+        sgriduser = sg.username;
+        sgridpass = sg.password;
+      }else{
+        sgriduser = process.env.SENDGRID_USERNAME;
+        sgridpass = process.env.SENDGRID_PASSWORD;
+      }
+      var smtpTransporter = nodemailer.createTransport(smtpTransport({
+        service: 'SendGrid',
+        auth : {
+          user : sgriduser,
+          pass : sgridpass
+        }
+      }));
+      var mailOptions = {
+        to: user.email,
+        from: 'donotreply@moodRing.com',
+        subject: 'moodRing Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/users/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransporter.sendMail(mailOptions, function(err) {
+        req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions. It should arrive shortly');
+        res.redirect('/users/login');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/users/login');
+  });
+}
 
 // save user to DB
 module.exports.register_user = function(req, res, next){

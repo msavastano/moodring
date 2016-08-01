@@ -18,10 +18,19 @@ $( document ).ready(function() {
         $('#oldmoodsid').hide();
       }else{
         $('#loginid').hide();
-      }      
+      }
     }
+
+    //$('#moodDate').html(dateFormatting(this));
+
+
+
 });
 
+var dateFormat = require('dateformat');
+var dateFormatting =  function (date){
+  return dateFormat(date, "fullDate")
+}
 // Use later
 var cbc = function changeBackground(color) {
    document.body.style.background = color;

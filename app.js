@@ -9,6 +9,8 @@ var passport = require('passport');
 var authenticate = require('./authenticate');
 var LocalStrategy = require('passport-local').Strategy;
 var cloudinary = require('cloudinary');
+var flash = require('express-flash');
+var session = require('express-session')
 
 
 require('./app_server/models/db');
@@ -32,7 +34,9 @@ app.use(cookieParser());
 
 // passport config
 var Users = require('./app_server/models/users');
+app.use(session({ secret: 'session secret key' }));
 app.use(passport.initialize());
+app.use(flash());
 passport.use(new LocalStrategy(Users.authenticate()));
 passport.serializeUser(Users.serializeUser());
 passport.deserializeUser(Users.deserializeUser());
