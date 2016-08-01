@@ -13,32 +13,19 @@ module.exports.get_image_page = function(req, res, next) {
   });
 };
 
-/*module.exports.image_upload = function(req, res, next) {
-  User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    console.log(user);
-    console.log(req.file.path);
-    user.pic = req.file.path;
-    user.save(function(err, user){
-      res.redirect('/');
-    });
-    //res.redirect('/');
-  });
-};*/
-
 module.exports.image_cl_upload = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
-    var stream = cloudinary.uploader.upload(req.file.path, function(result) {
-      console.log(result);
-      user.pic = result.url;
-      user.save(function(err, user){
-        res.redirect('/');
+    if(req.file){
+      var stream = cloudinary.uploader.upload(req.file.path, function(result) {
+        console.log(result);
+        user.pic = result.url;
+        user.save(function(err, user){
+          res.redirect('/');
+        });
       });
-    });
+    }
   });
 };
-
-
-
 
 // User Homepage
 module.exports.index = function(req, res, next) {

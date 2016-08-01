@@ -16,12 +16,12 @@ block content
       .row.list-group
         each com in md.comments
           .list-group-item#coms
-            p= com.comment 
-            p POSTED BY: #{com.postedBy.username}
+            p.CommText= com.comment 
+            p - #{com.postedBy.username}
             each comOncom in com.commentsOnComments
-              .list-group-item#coms
-                p= comOncom.commentOnComment 
-                p POSTED BY: #{comOncom.postedBy.username}
+              .list-group-item#comsoncoms
+                p.CommText= comOncom.commentOnComment 
+                p - #{comOncom.postedBy.username}
                 
 
   
