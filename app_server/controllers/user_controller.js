@@ -15,6 +15,7 @@ var async = require('async');
 var crypto = require('crypto');
 
 module.exports.get_forgot = function(req, res) {
+  res.clearCookie('auth');  
   res.render('forgot', {
     user: req.user
   });
