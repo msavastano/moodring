@@ -15,7 +15,7 @@ var async = require('async');
 var crypto = require('crypto');
 
 module.exports.get_forgot = function(req, res) {
-  res.clearCookie('auth');  
+  res.clearCookie('auth');
   res.render('forgot', {
     user: req.user
   });
@@ -32,6 +32,7 @@ module.exports.reset = function(req, res){
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
         user.setPassword(req.body.password, function(err, user) {
+          user.password = "";
           user.save(function(err) {
             res.redirect('/users/login');
           });
