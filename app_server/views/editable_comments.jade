@@ -1,0 +1,17 @@
+include _includes/sharedHTMLfunctions
+
+div.col-xs-12    
+  .row.list-group
+    each com in currMood.comments
+      .list-group-item#coms
+        p.CommText= com.comment 
+        p - #{com.postedBy.username} @
+          +formatDate(com.createdAt) 
+                     
+        a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Ring on Ring 
+        div          
+          each comOncom in com.commentsOnComments
+            .list-group-item#comsoncoms
+              p.CommText= comOncom.commentOnComment 
+              p - #{comOncom.postedBy.username} @
+                +formatDate(com.createdAt)

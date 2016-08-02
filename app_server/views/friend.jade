@@ -9,34 +9,16 @@ block content
   div.container
     .row
       .col-md-4.mood-div
-        h2= lastestFrMood.label
+        h2= currMood.label
       .col-md-4.col-md-push-4
-        img.profile_image.img-rounded(src=userpic)
-       
-  //div.container
-    //div.col-xs-12.col-sm-4.mood-div
-      //h2= lastestFrMood.label
+        img.profile_image.img-rounded(src=userpic)  
   
   div.container
     form.form-horizontal(action="", method="post", role="form", id="add_friend")
       .form-group        
         input.form-control(name="add_friend_btn", rows="5", type="hidden")
-      button.btn.btn-default.btn-sm#friendButton #{frBtnStr}
-    
-  div.container
-    h3 Rings 
-    a(href="/"+lastestFrMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
-    
-    .row.list-group
-      each com in lastestFrMood.comments
-        .list-group-item#coms
-          p.CommText= com.comment 
-          p - #{com.postedBy.username}
-          a(href="/"+lastestFrMood._id+"/comment/"+com._id+"/commentoncomment/"+fr._id+"/new").btn.btn-primary.btn-sm Ring on Ring                     
-          each comOncom in com.commentsOnComments
-            .list-group-item#comsoncoms
-              p.CommText= comOncom.commentOnComment 
-              p - #{comOncom.postedBy.username}
-                
-
-  
+      button.btn.btn-default.btn-sm#friendButton #{frBtnStr}  
+      div.container
+          h3 Rings 
+          a(href="/"+currMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
+          include editable_comments.jade 

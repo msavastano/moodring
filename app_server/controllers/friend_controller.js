@@ -59,7 +59,9 @@ module.exports.index = function(req, res, next) {
                                     moodMap: moodmapper.moodMap.moods,
                                     user : req.decoded._doc.username,
                                     fr : friend,
-                                    lastestFrMood : cm,
+                                    userid : friend._id,
+                                    lastestFrMood:cm,
+                                    currMood : cm,
                                     frBtnStr : friendBtnStr,
                                     nouser:req.decoded,
                                     userpic:friendpic
