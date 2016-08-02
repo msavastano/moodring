@@ -11,3 +11,8 @@
 * JSON
 * Jade, HTML, Bootstrap, CSS
 * Javascript, jQuery
+
+### Add-ons
+* Cloudinary - photo storage
+* mLab - MongoDB production DB (Heroku)
+* SendGrid - nodemailer for emailing password resets
