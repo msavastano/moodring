@@ -54,6 +54,17 @@ module.exports.index = function(req, res, next) {
           .exec(function(err, md){
             if(md.latestMood == true){
               cm = md;
+              // comments sort by date desc
+              cm.comments.sort(function(a,b){
+                if (a.createdAt > b.createdAt) {
+                  return -1;
+                }
+                if (a.createdAt < b.createdAt) {
+                  return 1;
+                }
+                // a must be equal to b
+                return 0;
+              });
               res.render('friend', { title: friend.username+'\'s Page',
                                     message: 'Welcome to',
                                     moodMap: moodmapper.moodMap.moods,

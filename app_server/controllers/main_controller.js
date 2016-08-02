@@ -53,7 +53,7 @@ module.exports.index = function(req, res, next) {
       //console.log(moodmapper.moodMap.moods);
       umoods.forEach(function(m, i){
         Moods.findById(m)
-          .populate('comments.postedBy')
+          .populate('comments.postedBy') //{path:'comments.postedBy', options:{sort:{'createdAt':-1}}})
           .populate('comments.commentsOnComments.postedBy')
           .exec(function(err, md){
           var foundOldMood = false;
@@ -62,6 +62,17 @@ module.exports.index = function(req, res, next) {
             foundOldMood = true
             var date = dateFormat(md.createdAt, "fullDate")
             cm = md;
+            // comments sort by date desc
+            cm.comments.sort(function(a,b){
+              if (a.createdAt > b.createdAt) {
+                return -1;
+              }
+              if (a.createdAt < b.createdAt) {
+                return 1;
+              }
+              // a must be equal to b
+              return 0;
+            });
             res.render('index', { title: 'My Page',
                                   message: 'Welcome to',
                                   moodMap: moodmapper.moodMap.moods,
@@ -86,6 +97,17 @@ module.exports.old_mood = function (req, res, next) {
   .populate('comments.commentsOnComments.postedBy')
   .exec(function(err, md){
     var date = dateFormat(md.createdAt, "fullDate")
+    // comments sort by date desc
+    md.comments.sort(function(a,b){
+      if (a.createdAt > b.createdAt) {
+          return -1;
+      }
+      if (a.createdAt < b.createdAt) {
+        return 1;
+      }
+      // a must be equal to b
+      return 0;
+    });
     res.render('old_mood', { title: 'Old Mood',
                           moodMap: moodmapper.moodMap.moods,
                           md:md,
