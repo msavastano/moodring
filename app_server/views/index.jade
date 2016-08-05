@@ -15,13 +15,28 @@ block content
       form.form-horizontal(action="", method="post", role="form", id="addMood")
         input(type="hidden", value=currMood.label, id="cm")
         .form-group  
-          .input-prepend.input-append              
+          .input-prepend.input-append             
             select(name="label", id="moodChoices").form-control
               optgroup(label="Select Mood")
                 each name, ix in moodMap
                   option(hex=name.colorHex, fonthex=name.fontHex, lab=name.label)= name.label                          
-        button.btn.btn-default.btn-sm Submit Mood  
+        div#confirm-submit.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+          .modal-dialog
+            .modal-content
+              .modal-header
+                | moodRing!
+              .modal-body
+                | Are you sure you want to change your mood?
+                
+              .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+                a#submit.btn.btn-success.success(href='#') Submit
+        //button.btn.btn-default.btn-sm#submitmoodbutton Submit Mood  
+        input#submitBtn.btn.btn-default(type='button', name='btn', value='Submit', data-toggle='modal', data-target='#confirm-submit')
   div.container-fluid
     h3 Rings 
     a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Ring on Mood 
-    include editable_comments.jade   
+    include editable_comments.jade  
+    
+  
+    

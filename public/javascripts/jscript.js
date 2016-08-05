@@ -21,6 +21,16 @@ $( document ).ready(function() {
       }
     }
 
+    $('#moodChoices').change(function(){
+      //alert( "Change your mood?" );
+      $('#moodChoices').fadeOut('fast').fadeIn('fast');
+    });
+
+    $('#submit').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+      $('#addMood').submit();
+    });
+
     //$('#moodDate').html(dateFormatting(this));
 
 
