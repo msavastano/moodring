@@ -1,6 +1,7 @@
 var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
+var stringify = require('json-stringify-safe');
 
 // post a new comment on comment
 module.exports.new_comment_on_comment = function(req, res, next){
@@ -9,11 +10,14 @@ module.exports.new_comment_on_comment = function(req, res, next){
         User.findById(req.params.userid)
        .exec(function (err, user){
         if (err) throw err;
+        console.log("%*&%&*^%&*%&*% "+mood);
+        console.log("BODY "+ stringify(req.body));
         req.body.postedBy = req.decoded._doc._id;
         mood.comments.forEach(function(c, i){
           console.log("c._id "+c._id);
           console.log("req.params.commentid "+req.params.commentid);
           if(c._id == req.params.commentid){
+            console.log("PUSHED");
             c.commentsOnComments.push(req.body);
           }
         });

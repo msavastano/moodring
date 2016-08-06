@@ -32,10 +32,12 @@ block content
                 button.btn.btn-default(type='button', data-dismiss='modal') Cancel
                 a#submit.btn.btn-success.success(href='#') Submit
         //button.btn.btn-default.btn-sm#submitmoodbutton Submit Mood  
-        input#submitBtn.btn.btn-default(type='button', name='btn', value='Submit', data-toggle='modal', data-target='#confirm-submit')
+        input#submitBtn.btn.btn-primary(type='button', name='btn', value='moodChange', data-toggle='modal', data-target='#confirm-submit') 
   div.container-fluid
     h3 Rings 
-    a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Ring on Mood 
+    //a(href="/"+currMood._id+"/comment/"+userid+"/new").btn.btn-default.btn-sm Ring on Mood 
+    input#commBtn.btn.btn-primary(type='button', name='combtn', value='Ring on Mood', data-toggle='modal', data-target='#confirm-submit-comm')
+    include page_comment
     include editable_comments.jade  
     
   

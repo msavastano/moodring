@@ -31,6 +31,23 @@ $( document ).ready(function() {
       $('#addMood').submit();
     });
 
+    $('#submitcomm').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+      $('#addComment').submit();
+    });
+
+    $('#submitcommcomm').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+      $('#addCommentComment').submit();
+    });
+
+    $('.commcommBtn').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+      //$(this).data("com-id", $(this).data("com-id"));
+      console.log("THIS   "+$(this).data("com-id"));
+      $('#com').val($(this).data("com-id"));
+    });
+
     //$('#moodDate').html(dateFormatting(this));
 
 

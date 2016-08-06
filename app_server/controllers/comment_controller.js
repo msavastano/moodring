@@ -17,13 +17,14 @@ module.exports.index = function(req, res, next) {
   });
 };
 
-// post a new comment 
+// post a new comment
 module.exports.new_comment = function(req, res, next){
   Moods.findById(req.params.moodid, function (err, mood){
     User.findById(req.params.userid)
      .exec(function (err, user){
       if (err) throw err;
       req.body.postedBy = req.decoded._doc._id;
+      console.log("BODY "+req.body);
       mood.comments.push(req.body);
       mood.save(function (err, dish) {
         if (err) throw err;
