@@ -45,7 +45,8 @@ $( document ).ready(function() {
       /* when the submit button in the modal is clicked, submit the form */
       //$(this).data("com-id", $(this).data("com-id"));
       console.log("THIS   "+$(this).data("com-id"));
-      $('#com').val($(this).data("com-id"));
+      $('#comcom').text($(this).data("com-id"));
+      var url = $(this).data("com-id");
     });
 
     //$('#moodDate').html(dateFormatting(this));
@@ -58,6 +59,7 @@ var dateFormat = require('dateformat');
 var dateFormatting =  function (date){
   return dateFormat(date, "fullDate")
 }
+
 // Use later
 var cbc = function changeBackground(color) {
    document.body.style.background = color;

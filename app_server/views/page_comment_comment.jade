@@ -1,12 +1,16 @@
-input(type="hidden", id="com") 
+
 div#confirm-submit-comm-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
-        p /#{currMood._id}/comment//commentoncomment/#{userid}/new
+        - var url = "<span id ='comcom'></span>"
+        p !{url}        
+        //p.
+        //  http://localhost:3000/57a5f8ad3f056817442f84ef/comment/57a5f8b43f056817442f84f0/commentoncomment/579d6573d0ea6e7a4cd9cc47/new
+        //  /#{currMood._id}/comment/!{url}/commentoncomment/#{userid}/new
       .modal-body
       // action = '/:moodid/comment/:commentid/commentoncomment/:userid/new'
-      form.form-horizontal(action="/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new" method="post", role="form", id="addCommentComment")    
+      form.form-horizontal(action="/#{currMood._id}/comment/57a5f8b43f056817442f84f0/commentoncomment/#{userid}/new" method="post", role="form", id="addCommentComment")    
         .form-group
           label.col-sm-2.control-label(for="comment") Comment
           .col-sm-10

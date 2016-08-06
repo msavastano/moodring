@@ -23,8 +23,8 @@ module.exports.new_comment_on_comment = function(req, res, next){
         });
         mood.save(function (err, dish) {
           if (err) throw err;
-          console.log("req.params.userid "+req.params.userid);
-          console.log("req.decoded._doc._id "+req.decoded._doc._id);
+          console.log("MOODSAVED");
+          //console.log("req.decoded._doc._id "+req.decoded._doc._id);
           if(req.params.userid == req.decoded._doc._id){
             res.redirect('/');
           }else{
