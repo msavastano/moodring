@@ -5,25 +5,26 @@ var stringify = require('json-stringify-safe');
 
 // post a new comment on comment
 module.exports.new_comment_on_comment = function(req, res, next){
-  Moods.findById(req.params.moodid)
-      .exec(function (err, mood){
-        User.findById(req.params.userid)
-       .exec(function (err, user){
+  Moods.findById(req.params.moodid, function (err, mood){
+      User.findById(req.params.userid)
+     .exec(function (err, user){
         if (err) throw err;
         console.log("%*&%&*^%&*%&*% "+mood);
-        console.log("BODY "+ stringify(req.body));
+
         req.body.postedBy = req.decoded._doc._id;
+
         mood.comments.forEach(function(c, i){
           console.log("c._id "+c._id);
           console.log("req.params.commentid "+req.params.commentid);
           if(c._id == req.params.commentid){
-            console.log("PUSHED");
+            console.log("BODY "+ stringify(req.body));
             c.commentsOnComments.push(req.body);
+            console.log("PUSHED");
           }
         });
         mood.save(function (err, dish) {
+          console.log(err);
           if (err) throw err;
-          console.log("MOODSAVED");
           //console.log("req.decoded._doc._id "+req.decoded._doc._id);
           if(req.params.userid == req.decoded._doc._id){
             res.redirect('/');
