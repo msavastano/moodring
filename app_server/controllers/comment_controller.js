@@ -1,6 +1,7 @@
 var Moods = require('../models/moods');
 var Verify = require('./verify');
 var User = require('../models/users');
+var stringify = require('json-stringify-safe');
 
 // get comment screen
 module.exports.index = function(req, res, next) {
@@ -24,7 +25,7 @@ module.exports.new_comment = function(req, res, next){
      .exec(function (err, user){
       if (err) throw err;
       req.body.postedBy = req.decoded._doc._id;
-      console.log("BODY "+req.body);
+      console.log("BODY "+ stringify(req.body));
       mood.comments.push(req.body);
       mood.save(function (err, dish) {
         if (err) throw err;

@@ -45,8 +45,7 @@ $( document ).ready(function() {
       /* when the submit button in the modal is clicked, submit the form */
       //$(this).data("com-id", $(this).data("com-id"));
       console.log("THIS   "+$(this).data("com-id"));
-      $('#comcom').text($(this).data("com-id"));
-      var url = $(this).data("com-id");
+      $('#comcom').val($(this).data("com-id"));
     });
 
     //$('#moodDate').html(dateFormatting(this));
@@ -58,6 +57,11 @@ $( document ).ready(function() {
 var dateFormat = require('dateformat');
 var dateFormatting =  function (date){
   return dateFormat(date, "fullDate")
+}
+
+
+function  getCommentID(){
+  return document.getElementById('comcom').value
 }
 
 // Use later

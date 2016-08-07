@@ -1,21 +1,25 @@
-
+input(type="hidden", id="comcom")
 div#confirm-submit-comm-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
   .modal-dialog
     .modal-content
       .modal-header
-        - var comcomid = "<span id ='comcom'></span>"
-        - var url = "/"+currMood._id+"/comment/"+"57a5f8b43f056817442f84f0"+"/commentoncomment/"+userid+"/new"
-        p !{url}        
+        //- var comcomid = "<span id ='comcom'></span>"
+        //- var url = "/"+currMood._id+"/comment/"+"#{getCommentID()}"+"/commentoncomment/"+userid+"/new"
+        //- var getCommentID = function(){
+        //-   return $('#comcom').value
+      //  - }
+        //p !{url} 
+        //p #{getCommentID}
         //p.
         //  http://localhost:3000/57a5f8ad3f056817442f84ef/comment/57a5f8b43f056817442f84f0/commentoncomment/579d6573d0ea6e7a4cd9cc47/new
         //  "/#{currMood._id}/comment/57a5f8b43f056817442f84f0/commentoncomment/#{userid}/new"
       .modal-body
       // action = '/:moodid/comment/:commentid/commentoncomment/:userid/new'
-      form.form-horizontal(action=url method="post", role="form", id="addCommentComment")    
+      form.form-horizontal(action="url" method="post", role="form", id="addCommentComment")    
         .form-group
           label.col-sm-2.control-label(for="comment") Comment
           .col-sm-10
-            textarea#reviewcomm.form-control(name="comment" rows="5")
+            textarea#reviewcomm.form-control(name="commentOnComment" rows="5")
       .modal-footer
         button.btn.btn-default(type='button', data-dismiss='modal') Cancel
         a#submitcommcomm.btn.btn-success.success(href='#') Submit
