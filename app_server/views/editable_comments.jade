@@ -7,9 +7,11 @@ div.col-xs-12
         p.CommText= com.comment 
         p - #{com.postedBy.username} @
           +formatDate(com.createdAt) 
-        input.commcommBtn.btn.btn-primary(type='button', name='comcombtn', data-com-id="#{com._id}" ,value='Ring on Ring', data-toggle='modal', data-target='#confirm-submit-comm-comm')             
+        //input.commcommBtn.btn.btn-primary(type='button', name='comcombtn', data-com-id="#{com._id}" ,value='Ring on Ring', data-toggle='modal', data-target='#confirm-submit-comm-comm')             
+        //href='/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new'        
+        //a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new", data-toggle='modal', data-target='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring 
+        a.commcommBtn(data-com-id="/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new", data-toggle='modal', href='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring 
         include page_comment_comment
-        //a(href="/"+currMood._id+"/comment/"+com._id+"/commentoncomment/"+userid+"/new").btn.btn-primary.btn-sm Ring on Ring 
         div          
           each comOncom in com.commentsOnComments
             .list-group-item#comsoncoms

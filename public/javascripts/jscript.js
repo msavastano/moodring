@@ -44,9 +44,18 @@ $( document ).ready(function() {
     $('.commcommBtn').click(function(){
       /* when the submit button in the modal is clicked, submit the form */
       //$(this).data("com-id", $(this).data("com-id"));
-      console.log("THIS   "+$(this).data("com-id"));
-      $('#comcom').val($(this).data("com-id"));
+      //console.log("THIS   "+$(this).data("com-id"));
+      //$('#comcomid').val($(this).data("com-id"));
+      //console.log($(this).data("com-id"));
+      $('#addCommentComment').attr("action", $(this).data("com-id"))
     });
+
+    /*$('#confirm-submit-comm-comm').on('show.bs.modal', function(e) {
+      //get data-id attribute of the clicked element
+      var comId = $(e.relatedTarget).data('com-id');
+      //populate the textbox
+      $(e.currentTarget).find('input[name="comId"]').val(comId);
+    });*/
 
     //$('#moodDate').html(dateFormatting(this));
 
