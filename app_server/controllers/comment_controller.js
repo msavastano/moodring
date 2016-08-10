@@ -7,23 +7,22 @@ var stringify = require('json-stringify-safe');
 module.exports.index = function(req, res, next) {
   Moods.findById(req.params.moodid)
    .exec(function (err, mood){
-     User.findById(req.params.userid)
-      .exec(function (err, user){
+     //User.findById(req.params.userid)
+      //.exec(function (err, user){
         res.render('comment', { title: 'Comment',
                             message: 'Welcome to',
-                            mood:mood,
-                            user:user
+                            mood:mood
                           });
-    });
+    //});
   });
 };
 
 // post a new comment
 module.exports.new_comment = function(req, res, next){
   console.log("BODY "+ stringify(req.body));
-  Moods.findById(req.params.moodid, function (err, mood){
-    User.findById(req.params.userid)
-     .exec(function (err, user){
+  Moods.findById(req.params.moodid) //, function (err, mood){
+    //User.findById(req.params.userid)
+     .exec(function (err, mood){
       if (err) throw err;
       req.body.postedBy = req.decoded._doc._id;
       console.log("BODY "+ stringify(req.body));
@@ -36,6 +35,6 @@ module.exports.new_comment = function(req, res, next){
           res.redirect('/friend/'+req.params.userid);
         }
       });
-    });
+
   });
 };

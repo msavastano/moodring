@@ -5,9 +5,9 @@ var stringify = require('json-stringify-safe');
 
 // post a new comment on comment
 module.exports.new_comment_on_comment = function(req, res, next){
-  Moods.findById(req.params.moodid, function (err, mood){
-      User.findById(req.params.userid)
-     .exec(function (err, user){
+  Moods.findById(req.params.moodid)
+      //User.findById(req.params.userid)
+     .exec(function (err, mood){
         if (err) throw err;
         console.log("%*&%&*^%&*%&*% "+mood);
 
@@ -25,7 +25,8 @@ module.exports.new_comment_on_comment = function(req, res, next){
         mood.save(function (err, dish) {
           console.log(err);
           if (err) throw err;
-          //console.log("req.decoded._doc._id "+req.decoded._doc._id);
+          console.log("req.decoded._doc._id "+req.decoded._doc._id);
+          console.log("req.params.userid "+req.params.userid);
           if(req.params.userid == req.decoded._doc._id){
             res.redirect('/');
           }else{
@@ -33,7 +34,7 @@ module.exports.new_comment_on_comment = function(req, res, next){
           }
         });
     });
-  });
+  //});
 };
 
 // get comment on comment screen

@@ -70,7 +70,7 @@ module.exports.index = function(req, res, next) {
                                     moodMap: moodmapper.moodMap.moods,
                                     user : friend.username,
                                     fr : friend,
-                                    userid : req.decoded._doc._id,
+                                    userid : friend._id,
                                     lastestFrMood:cm,
                                     currMood : cm,
                                     frBtnStr : friendBtnStr,
