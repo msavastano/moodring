@@ -20,5 +20,7 @@ block content
       button.btn.btn-default.btn-sm#friendButton #{frBtnStr}  
       div.container
           h3 Rings 
-          a(href="/"+currMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
+          //a(href="/"+currMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
+          input#commFriendBtn.btn.btn-primary(type='button', name='combtn', value='Ring on Mood', data-toggle='modal', data-target='#friend-submit-comm')
+          include friend_page_comment
           include editable_comments.jade 

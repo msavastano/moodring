@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    console.log("IN");
     // This sets the current mood in page
     if(document.getElementById('cm')){
         var currMood = document.getElementById('cm').value;
@@ -9,7 +8,6 @@ $( document ).ready(function() {
     // Control tab buttons by user logged in or not
     if(document.getElementById('nu')){
       var nu = document.getElementById('nu').value;
-      console.log(nu);
       if(!nu){
         console.log('notnu')
         $('#logoutid').hide();
@@ -26,7 +24,7 @@ $( document ).ready(function() {
       $('#moodChoices').fadeOut('fast').fadeIn('fast');
     });
 
-    $('#submit').click(function(){
+    $('#submitmd').click(function(){
       /* when the submit button in the modal is clicked, submit the form */
       $('#addMood').submit();
     });
@@ -36,38 +34,23 @@ $( document ).ready(function() {
       $('#addComment').submit();
     });
 
+    $('#friendsubmitcomm').click(function(){
+      /* when the submit button in the modal is clicked, submit the form */
+      //console.log($(this).data("fr-id"));
+      //$('#addFriendComment').attr("action", $(this).data("fr-id"));
+      $('#addFriendComment').submit();
+      console.log("addFriendComment");
+    });
+
     $('#submitcommcomm').click(function(){
       /* when the submit button in the modal is clicked, submit the form */
       $('#addCommentComment').submit();
     });
 
     $('.commcommBtn').click(function(){
-      /* when the submit button in the modal is clicked, submit the form */
-      //$(this).data("com-id", $(this).data("com-id"));
-      //console.log("THIS   "+$(this).data("com-id"));
-      //$('#comcomid').val($(this).data("com-id"));
-      //console.log($(this).data("com-id"));
-      $('#addCommentComment').attr("action", $(this).data("com-id"))
+      $('#addCommentComment').attr("action", $(this).data("com-id"));
     });
-
-    /*$('#confirm-submit-comm-comm').on('show.bs.modal', function(e) {
-      //get data-id attribute of the clicked element
-      var comId = $(e.relatedTarget).data('com-id');
-      //populate the textbox
-      $(e.currentTarget).find('input[name="comId"]').val(comId);
-    });*/
-
-    //$('#moodDate').html(dateFormatting(this));
-
-
-
 });
-
-var dateFormat = require('dateformat');
-var dateFormatting =  function (date){
-  return dateFormat(date, "fullDate")
-}
-
 
 function  getCommentID(){
   return document.getElementById('comcom').value

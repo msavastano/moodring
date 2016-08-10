@@ -20,6 +20,7 @@ module.exports.index = function(req, res, next) {
 
 // post a new comment
 module.exports.new_comment = function(req, res, next){
+  console.log("BODY "+ stringify(req.body));
   Moods.findById(req.params.moodid, function (err, mood){
     User.findById(req.params.userid)
      .exec(function (err, user){

@@ -1,0 +1,19 @@
+div#friend-submit-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      .modal-header
+        p #{user}'s mood is #{currMood.label}   
+        p  #{currMood._id}  #{userid}
+      .modal-body      
+      form.form-horizontal(action="/friend/#{fr.id}/#{currMood._id}/comment/#{userid}/new" method="post" role="form" id="addFriendComment")    
+        .form-group
+          label.col-sm-2.control-label(for="comment") Comment
+          .col-sm-10
+            textarea#review.form-control(name="comment", rows="5")
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+        a#friendsubmitcomm.btn.btn-success.success(href="/friend/#{fr.id}") Comment
+        //a.commcommBtn(data-fr-id="/#{currMood._id}/comment/#{userid}/new", data-toggle='modal', href='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring
+
+
+    

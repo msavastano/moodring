@@ -21,8 +21,9 @@ var verifyOrdinaryUser = function (req, res, next) {
             if (err) {
               var err = new Error("Not logged in!");
               err.status = 401;
-              res.redirect('/users/login');            
+              res.redirect('/users/login');
             } else {
+                console.log("HELOOOOOO!!!");
                 req.decoded = decoded;
                 next();
             }
