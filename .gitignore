@@ -6,3 +6,5 @@ uploads/*
 !hf.jpg
 cloudin.js
 sendgrid.js
+app_server/views/retired/*
+node_modules/*
