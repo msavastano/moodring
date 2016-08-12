@@ -2,7 +2,7 @@ div#confirm-submit-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby
   .modal-dialog
     .modal-content
       .modal-header
-        p #{user}'s mood is #{currMood.label}        
+        p #{user}'s mood is #{currMood.label}    
       .modal-body      
       form.form-horizontal(action="/#{currMood._id}/comment/#{userid}/new" method="post", role="form", id="addComment")   
         .form-group
