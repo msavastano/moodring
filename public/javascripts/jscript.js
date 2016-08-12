@@ -30,20 +30,10 @@ $( document ).ready(function() {
     });
 
     $('#submitcomm').click(function(){
-      /* when the submit button in the modal is clicked, submit the form */
       $('#addComment').submit();
     });
 
-    $('#friendsubmitcomm').click(function(){
-      /* when the submit button in the modal is clicked, submit the form */
-      //console.log($(this).data("fr-id"));
-      //$('#addFriendComment').attr("action", $(this).data("fr-id"));
-      $('#addFriendComment').submit();
-      console.log("addFriendComment");
-    });
-
     $('#submitcommcomm').click(function(){
-      /* when the submit button in the modal is clicked, submit the form */
       $('#addCommentComment').submit();
     });
 

@@ -18,9 +18,8 @@ block content
       .form-group        
         input.form-control(name="add_friend_btn", rows="5", type="hidden")
       button.btn.btn-default.btn-sm#friendButton #{frBtnStr}  
-      div.container
-          h3 Rings 
-          //a(href="/"+currMood._id+"/comment/"+fr._id+"/new").btn.btn-default.btn-sm Ring on Mood
-          input#commFriendBtn.btn.btn-primary(type='button', name='combtn', value='Ring on Mood', data-toggle='modal', data-target='#friend-submit-comm')
-          include friend_page_comment
+      div.container-fluid
+          h3 Rings           
+          input.commBtn.btn.btn-primary(type='button', name='frcombtn', value='Ring on Mood', data-toggle='modal', data-target='#confirm-submit-comm')          
           include editable_comments.jade 
+          include page_comment

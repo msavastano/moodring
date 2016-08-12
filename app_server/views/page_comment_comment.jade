@@ -2,10 +2,12 @@ div#confirm-submit-comm-comm.modal.fade(tabindex='-1', role='dialog', aria-label
   .modal-dialog
     .modal-content
       .modal-header  
+      //p #{user}'s mood is #{currMood.label}   
+      //p  #{currMood._id}  #{userid} #{fr.id}
       .modal-body      
       form.form-horizontal(method="post", role="form", id="addCommentComment")    
         .form-group
-          label.col-sm-2.control-label(for="comment") Comment
+          label.col-sm-2.control-label(for="commentOnComment") Comment
           .col-sm-10
             textarea#reviewcomm.form-control(name="commentOnComment" rows="5")
       .modal-footer

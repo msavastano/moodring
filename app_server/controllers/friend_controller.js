@@ -71,7 +71,7 @@ module.exports.index = function(req, res, next) {
                                     user : friend.username,
                                     fr : friend,
                                     userid : friend._id,
-                                    lastestFrMood:cm,
+                                    //lastestFrMood:cm,
                                     currMood : cm,
                                     frBtnStr : friendBtnStr,
                                     nouser:req.decoded,
