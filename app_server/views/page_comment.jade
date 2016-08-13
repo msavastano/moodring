@@ -2,7 +2,8 @@ div#confirm-submit-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby
   .modal-dialog
     .modal-content
       .modal-header
-        p #{user}'s mood is #{currMood.label}    
+        p #{user}'s mood is #{currMood.label}   
+        p THIS IS PAGE COMMENT   
       .modal-body      
       form.form-horizontal(action="/#{currMood._id}/comment/#{userid}/new" method="post", role="form", id="addComment")   
         .form-group
@@ -11,7 +12,7 @@ div#confirm-submit-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby
             textarea#review.form-control(name="comment", rows="5")
       .modal-footer
         button.btn.btn-default(type='button', data-dismiss='modal') Cancel
-        a#submitcomm.btn.btn-success.success Ring
+        a#submitcomm.btn.btn-success.success(href="#") Ring
 
 
     

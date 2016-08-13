@@ -50,12 +50,12 @@ router.get('/friendlist', Verify.verifyOrdinaryUser, ctrlFriendList.index);
 router.get('/oldmoods/:moodid', Verify.verifyOrdinaryUser, ctrlMain.old_mood);
 
 /* GET comment new screen */
-router.get('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.index);
+//router.get('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.index);
 /*POST new comment*/
-router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);             
-router.post('/friend/:friendid/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
+router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
+//router.post('/friend/:friendid/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComment.new_comment);
 /* GET comment on comment new screen */
-router.get('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
+//router.get('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.index);
 /*POST new comment on comment*/
 router.post('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 

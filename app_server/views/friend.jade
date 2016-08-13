@@ -18,9 +18,24 @@ block content
       .form-group        
         input.form-control(name="add_friend_btn", rows="5", type="hidden")
       button.btn.btn-default.btn-sm#friendButton #{frBtnStr}  
-      div.container-fluid
-          h3 Rings           
-          input.commBtn.btn.btn-primary(type='button', name='frcombtn', value='Ring on Mood', data-toggle='modal', data-target='#confirm-submit-comm')          
-          include editable_comments          
-          include page_comment
-          
+  div.container-fluid
+    h3 Rings           
+    input.commBtn.btn.btn-primary(type='button', name='frcombtn', value='Ring on Mood', data-toggle='modal', data-target='#confirm-submit-comm')          
+    include page_comment
+    include _includes/sharedHTMLfunctions
+    div.col-xs-12    
+      .row.list-group
+        each com in currMood.comments
+          .list-group-item#coms
+            p.CommText= com.comment 
+            p - #{com.postedBy.username} @
+              +formatDate(com.createdAt) 
+            a.commcommBtn(data-com-id="/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new", data-toggle='modal', data-target='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring 
+            include page_comment_comment
+            div          
+              each comOncom in com.commentsOnComments
+                .list-group-item#comsoncoms
+                  p.CommText= comOncom.commentOnComment 
+                  p - #{comOncom.postedBy.username} @
+                    +formatDate(com.createdAt) 
+            
