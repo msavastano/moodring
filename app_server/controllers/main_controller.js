@@ -13,6 +13,11 @@ module.exports.get_image_page = function(req, res, next) {
   });
 };
 
+module.exports.get_mood_feed = function(req, res, next) {
+  res.render('moodfeed', {
+  });
+};
+
 module.exports.image_cl_upload = function(req, res, next) {
   User.findById(req['decoded']['_doc']['_id'], function(err, user){
     if(req.file){
