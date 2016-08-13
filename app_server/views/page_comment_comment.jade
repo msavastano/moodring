@@ -1,17 +1,21 @@
 div#confirm-submit-comm-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
   .modal-dialog
-    .modal-content
+    .modal-content.com-text 
       .modal-header 
-      p THIS IS PAGE COMMENT ON COMMENT     
-      .modal-body      
+      p.comcomtext
+        span#comcomuser
+        |   says "
+        span#comcomheader
+        |"
+      .modal-body     
       form.form-horizontal(method="post", role="form", id="addCommentComment")    
         .form-group
-          label.col-sm-2.control-label(for="commentOnComment") Comment
+          label.col-sm-2.control-label(for="commentOnComment") Talk:
           .col-sm-10
             textarea#review.form-control(name="commentOnComment" rows="5")
       .modal-footer
         button.btn.btn-default(type='button', data-dismiss='modal') Cancel
-        a#submitcommcomm.btn.btn-success.success Submit
+        a#submitcommcomm.btn.btn-success.success Ring
 
 
     

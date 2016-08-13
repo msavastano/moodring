@@ -30,7 +30,7 @@ block content
             p.CommText= com.comment 
             p - #{com.postedBy.username} @
               +formatDate(com.createdAt) 
-            a.commcommBtn(data-com-id="/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new", data-toggle='modal', data-target='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring 
+            a.commcommBtn(data-com-com="#{com.comment}", data-com-user="#{com.postedBy.username}", data-com-id="/#{currMood._id}/comment/#{com._id}/commentoncomment/#{userid}/new", data-toggle='modal', data-target='#confirm-submit-comm-comm').btn.btn-primary.btn-sm Ring on Ring 
             include page_comment_comment
             div          
               each comOncom in com.commentsOnComments

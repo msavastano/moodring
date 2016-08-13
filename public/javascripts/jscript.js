@@ -39,6 +39,8 @@ $( document ).ready(function() {
 
     $('.commcommBtn').click(function(){
       $('#addCommentComment').attr("action", $(this).data("com-id"));
+      $('#comcomheader').text($(this).data("com-com"));
+      $('#comcomuser').text($(this).data("com-user"));
     });
 });
 

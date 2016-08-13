@@ -1,13 +1,12 @@
 div#confirm-submit-comm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
   .modal-dialog
-    .modal-content
+    .modal-content.com-text 
       .modal-header
-        p #{user}'s mood is #{currMood.label}   
-        p THIS IS PAGE COMMENT   
+        p.comcomtext #{user}'s mood is #{currMood.label}
       .modal-body      
       form.form-horizontal(action="/#{currMood._id}/comment/#{userid}/new" method="post", role="form", id="addComment")   
         .form-group
-          label.col-sm-2.control-label(for="comment") Comment
+          label.col-sm-2.control-label(for="comment") Talk:
           .col-sm-10
             textarea#review.form-control(name="comment", rows="5")
       .modal-footer
