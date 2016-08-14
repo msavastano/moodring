@@ -7,6 +7,7 @@ var ctrlFriendPage = require('../controllers/friend_controller');
 var ctrlFriendList = require('../controllers/friend_list_controller');
 var ctrlComment = require('../controllers/comment_controller');
 var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller');
+var ctrlMoodFeed = require('../controllers/moodfeed_controller')
 var upload = multer({ dest: './uploads' });
 var stringify = require('json-stringify-safe');
 
@@ -53,6 +54,6 @@ router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComme
 /*POST new comment on comment*/
 router.post('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 /*Get Mood Feed*/
-router.get('/moodfeed', Verify.verifyOrdinaryUser, ctrlMain.get_mood_feed);
+router.get('/moodfeed', Verify.verifyOrdinaryUser, ctrlMoodFeed.get_mood_feed);
 
 module.exports = router;

@@ -7,8 +7,10 @@ var stringify = require('json-stringify-safe');
 module.exports.index = function(req, res, next) {
   var fs = [];
   User
-    .findById(req.decoded._doc._id, function(err, user){
-      if (err) {
+    .findById(req.decoded._doc._id)
+    .populate('friends')
+    .exec(function(err, user){
+      /*if (err) {
         sendJSONresponse(res, 400, err);
       } else {
 
@@ -20,14 +22,12 @@ module.exports.index = function(req, res, next) {
                   fs.push(u);
                 }
               });
-            });
-            res.render('friend_list', { title: 'Friends List',
-                                        message: 'Welcome to',
-                                        user : user,
-                                        friends : fs,
-                                        nouser:req.decoded
-                                      });
-        });
-      }
+            });*/
+      res.render('friend_list', { title: 'Friends List',
+                                  message: 'Welcome to',
+                                  user : user,
+                                  friends : user.friends,
+                                  nouser:req.decoded
+                                });    
     });
 };
