@@ -9,25 +9,12 @@ module.exports.index = function(req, res, next) {
   User
     .findById(req.decoded._doc._id)
     .populate('friends')
-    .exec(function(err, user){
-      /*if (err) {
-        sendJSONresponse(res, 400, err);
-      } else {
-
-        User.find({}, function(err, users){
-            users.forEach(function(u, i){
-
-              user.friends.forEach(function(f, i){
-                if(String(u._id) == String(f)){
-                  fs.push(u);
-                }
-              });
-            });*/
+    .exec(function(err, user){    
       res.render('friend_list', { title: 'Friends List',
                                   message: 'Welcome to',
                                   user : user,
                                   friends : user.friends,
                                   nouser:req.decoded
-                                });    
+                                });
     });
 };

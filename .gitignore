@@ -8,3 +8,4 @@ cloudin.js
 sendgrid.js
 app_server/views/retired/*
 node_modules/*
+app_server/views/test.jade

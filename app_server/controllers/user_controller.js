@@ -112,8 +112,7 @@ module.exports.forgot = function(req, res, next) {
         req.flash('info', 'An e-mail has been sent to ' + user.email + ' with further instructions. It should arrive shortly');
         res.redirect('/users/login');
       });
-    }
-  ], function(err) {
+    }], function(err) {
     if (err) return next(err);
     res.redirect('/users/login');
   });

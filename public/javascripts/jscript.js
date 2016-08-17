@@ -14,6 +14,7 @@ $( document ).ready(function() {
         $('#friendlistid').hide();
         $('#searchid').hide();
         $('#oldmoodsid').hide();
+        $('#moodfeedid').hide();
       }else{
         $('#loginid').hide();
       }

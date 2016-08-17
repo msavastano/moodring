@@ -1,5 +1,18 @@
 extends layout
 
 block content 
+  include _includes/sharedHTMLfunctions
   div.container 
-    p MOODFEED
+  input(type="hidden", value=nouser, id="nu")
+  //p #{frcomments}
+  each mood in frcomments
+    each comment in mood.comments
+      .list-group-item#coms
+        p #{comment.comment}
+        p #{comment.postedBy.username}
+        each comcom in comment.commentsOnComments
+          .list-group-item#comsoncoms
+            p #{comcom.commentOnComment}
+            p #{comcom.postedBy.username}
+    
+            

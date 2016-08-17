@@ -12,7 +12,7 @@ var stringify = require('json-stringify-safe');
 
 // Verify and decode the token
 var verifyOrdinaryUser = function (req, res, next) {
-    console.log("HELOOOOOO22222222222!!!");
+
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies['auth'];
     // decode token
@@ -24,7 +24,7 @@ var verifyOrdinaryUser = function (req, res, next) {
               err.status = 401;
               res.redirect('/users/login');
             } else {
-                console.log("HELOOOOOO!!!");
+                
                 req.decoded = decoded;
                 next();
             }
