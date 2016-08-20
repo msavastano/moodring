@@ -4,7 +4,7 @@ block content
   include _includes/sharedHTMLfunctions
   div.container 
   h1 #{user}'s moodFeed!
-  p #{frPlusMoods[1]['mood']}
+  //p #{frPlusMoods[1]['mood']}
   input(type="hidden", value=nouser, id="nu")
   //p #{frcomments}
   each friendMood in frPlusMoods    
@@ -12,7 +12,7 @@ block content
       .list-group-item#coms
         p @ 
           +formatDate(comment.createdAt)
-          |, #{comment.postedBy.username} said on #{friendMood['friend'].username}'s mood':
+          |, #{comment.postedBy.username} said on #{friendMood['friend'].username}'s mood:
         p #{comment.comment}      
         p #{comment._id}  
         each comcom in comment.commentsOnComments
