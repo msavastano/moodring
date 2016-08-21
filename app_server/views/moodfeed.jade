@@ -2,8 +2,13 @@ extends layout
 
 block content 
   include _includes/sharedHTMLfunctions
-  div.container 
-  h1 #{user}'s moodFeed!  
+  
+  div.container
+    .row   
+      h1 #{user}'s moodFeed!   
+        .col-md-4
+          img.profile_image.img-rounded(src=userpic)
+         
   input(type="hidden", value=nouser, id="nu")
   - allComments.sort(function(a,b){
   -  if (a.updatedAt < b.updatedAt) {
@@ -16,16 +21,20 @@ block content
   - });        
   each comment in allComments     
     .list-group-item#coms
+      a(href="/friend/#{comment.friendid}") 
+        img.profile_thumb.img-rounded(src=comment.pic)
       p @ 
         +formatDate(comment.createdAt)
         |, #{comment.postedBy.username} said on #{comment.friend}'s mood:
-      p.CommText #{comment.comment}      
+        
+      p.CommText #{comment.comment}  
+             
        
       each comcom in comment.commentsOnComments
         .list-group-item#comsoncoms
           p @
             +formatDate(comcom.createdAt)
-            |,#{comcom.postedBy.username} said:
+            |, #{comcom.postedBy.username} said:
           p.CommText #{comcom.commentOnComment}
           
     
