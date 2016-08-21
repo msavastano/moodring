@@ -3,24 +3,30 @@ extends layout
 block content 
   include _includes/sharedHTMLfunctions
   div.container 
-  h1 #{user}'s moodFeed!
-  //p #{frPlusMoods[1]['mood']}
+  h1 #{user}'s moodFeed!  
   input(type="hidden", value=nouser, id="nu")
-  //p #{frcomments}
-  each friendMood in frPlusMoods    
-    each comment in friendMood['mood'].comments
-      .list-group-item#coms
-        p @ 
-          +formatDate(comment.createdAt)
-          |, #{comment.postedBy.username} said on #{friendMood['friend'].username}'s mood:
-        p #{comment.comment}      
-        p #{comment._id}  
-        each comcom in comment.commentsOnComments
-          .list-group-item#comsoncoms
-            p @
-              +formatDate(comcom.createdAt)
-              |,#{comcom.postedBy.username} said:
-            p #{comcom.commentOnComment}
+  - allComments.sort(function(a,b){
+  -  if (a.updatedAt < b.updatedAt) {
+  -    return 1;
+  -  }
+  -  if (a.updatedAt > b.updatedAt) {
+  -    return -1;
+  -  }      
+  -  return 0;
+  - });        
+  each comment in allComments     
+    .list-group-item#coms
+      p @ 
+        +formatDate(comment.createdAt)
+        |, #{comment.postedBy.username} said on #{comment.friend}'s mood:
+      p.CommText #{comment.comment}      
+       
+      each comcom in comment.commentsOnComments
+        .list-group-item#comsoncoms
+          p @
+            +formatDate(comcom.createdAt)
+            |,#{comcom.postedBy.username} said:
+          p.CommText #{comcom.commentOnComment}
           
     
             

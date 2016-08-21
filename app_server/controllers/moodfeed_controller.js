@@ -12,6 +12,7 @@ var async = require('async');
 module.exports.get_mood_feed = function(req, res, next) {
   var friends;
   var friendPlusMoods = [];
+  var allComments = [];
   var fids = [];
   User.findById(req['decoded']['_doc']['_id'])
     .populate('friends')
@@ -29,11 +30,20 @@ module.exports.get_mood_feed = function(req, res, next) {
               }
               if(fids.indexOf(f._id) == -1){
                 fids.push(f._id);
-              }              
+              }
               if(fids.length == user.friends.length && (i+1) == f.moods.length){
                 console.log("RENDERED");
-                res.render('moodfeed', {
-                  frPlusMoods : friendPlusMoods,
+                for (i = 0; i < friendPlusMoods.length; i++) {
+                  for (j = 0; j < friendPlusMoods[i]['mood']['comments'].length; j++) {
+                    friendPlusMoods[i]['mood']['comments'][j]['friend'] = friendPlusMoods[i]['friend']['username'];
+                    //friendPlusMoods[i]['fusername'] = friendPlusMoods[i]['friend']['username'];
+                    friendPlusMoods[i]['mood']['comments'][j].save(function(){
+                      allComments.push( friendPlusMoods[i]['mood']['comments'][j] );
+                    });
+                  }
+                }
+                res.render('moodfeed', {                  
+                  allComments:allComments,
                   user : req.decoded._doc.username,
                   nouser:req.decoded
                 });
