@@ -18,13 +18,7 @@ module.exports.get_mood_feed = function(req, res, next) {
     .populate('friends')
     .exec(function(err, user){
       if(user.friends.length == 0){
-        res.render('search_friends', { title: 'Search Friends',
-                              message: 'Welcome to',
-                              moodMap:moodmapper.moodMap.moods,
-                              user : req.decoded._doc.username,
-                              finds : [],
-                              nouser:req.decoded
-                          });
+        res.redirect('/searchfriends');
       }
       user.friends.forEach(function(f, fi){
         User.findById(f._id)
@@ -45,10 +39,7 @@ module.exports.get_mood_feed = function(req, res, next) {
                 for (i = 0; i < friendPlusMoods.length; i++) {
                   for (j = 0; j < friendPlusMoods[i]['mood']['comments'].length; j++) {
                     friendPlusMoods[i]['mood']['comments'][j]['friend'] = friendPlusMoods[i]['friend']['username'];
-                    //friendPlusMoods[i]['fusername'] = friendPlusMoods[i]['friend']['username'];
-                    friendPlusMoods[i]['mood']['comments'][j].save(function(){
-                      allComments.push( friendPlusMoods[i]['mood']['comments'][j] );
-                    });
+                    allComments.push( friendPlusMoods[i]['mood']['comments'][j] );                    
                   }
                 }
                 res.render('moodfeed', {
