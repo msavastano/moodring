@@ -4,7 +4,7 @@ include _includes/sharedHTMLfunctions
 
 block content
   div
-    h1= title
+    h1.header-font #{user.username}'s #{title}
     input(type="hidden", value=nouser, id="nu")
         
     .row

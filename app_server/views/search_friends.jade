@@ -2,8 +2,7 @@ extends layout
 
 block content
   div
-    h1= title    
-    p #{user} searching for friends
+    h1.header-font #{title}
     p #{key}
     input(type="hidden", value=nouser, id="nu")  
     
@@ -14,7 +13,7 @@ block content
           label.col-sm-2.control-label(for="friend") Friend Search
           .col-sm-10
             input#review.form-control(name="friend")
-        button.btn.btn-default.pull-right Submit
+        button.btn.btn-default.pull-right Search
       .col-xs-12.col-md-4
       
     div.container
@@ -23,4 +22,6 @@ block content
       .row.list-group
         each find in finds
           .list-group-item            
-            a(href="/friend/"+find._id).btn.btn-default #{find.username}
+            a(href="/friend/"+find._id) 
+              img.profile_thumb.img-rounded(src=find.pic)  
+              | #{find.username}

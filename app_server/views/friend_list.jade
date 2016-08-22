@@ -2,8 +2,7 @@ extends layout
 
 block content
   div
-    h1= title
-    p #{message} #{title}
+    h1.header-font #{user.username}'s #{title}    
     input(type="hidden", value=nouser, id="nu")
     
     div.container
@@ -12,4 +11,6 @@ block content
       .row.list-group
       each f in friends
         .list-group-item            
-          a(href="/friend/"+f._id)= f.username           
+          a(href="/friend/"+f._id) 
+           img.profile_thumb.img-rounded(src=f.pic)  
+           | #{f.username}
