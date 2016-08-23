@@ -14,6 +14,7 @@ module.exports.get_mood_feed = function(req, res, next) {
   var friendPlusMoods = [];
   var allComments = [];
   var fids = [];
+  var ms = []
   User.findById(req['decoded']['_doc']['_id'])
     .populate('friends')
     .exec(function(err, user){
@@ -23,10 +24,12 @@ module.exports.get_mood_feed = function(req, res, next) {
       user.friends.forEach(function(f, fi){
         User.findById(f._id)
           .populate('moods')
-          .populate('moods.comments.postedBy')
-          .populate('moods.comments.commentsOnComments.postedBy')
           .exec(function(err, f){
+
             f.moods.forEach(function(mo,i){
+              console.log(f.username);
+              console.log(i);
+
               Moods.findById(mo._id)
               .populate('comments.postedBy')
               .populate('comments.commentsOnComments.postedBy')
@@ -37,11 +40,22 @@ module.exports.get_mood_feed = function(req, res, next) {
                   friendPlusMood['mood'] = m;
                   friendPlusMoods.push(friendPlusMood);
                 }
+
                 if(fids.indexOf(f._id) == -1){
                   fids.push(f._id);
+                  ms = []
                 }
-                if(fids.length == user.friends.length && (i+1) == f.moods.length){
-                  console.log("RENDERED");
+                if(ms.indexOf(m._id)){
+                  ms.push(m._id);
+                }
+
+                console.log("fids.length "+fids.length);
+                console.log("user.friends.length "+user.friends.length);
+                console.log("ms.length "+ ms.length);
+                console.log("f.moods.length "+f.moods.length);
+                //if(fids.length == user.friends.length && (i+1) == f.moods.length){
+                if(fids.length == user.friends.length && ms.length == f.moods.length){
+                  console.log("****************RENDERED****************");
                   for (i = 0; i < friendPlusMoods.length; i++) {
                     for (j = 0; j < friendPlusMoods[i]['mood']['comments'].length; j++) {
                       friendPlusMoods[i]['mood']['comments'][j]['friend'] = friendPlusMoods[i]['friend']['username'];
@@ -50,7 +64,7 @@ module.exports.get_mood_feed = function(req, res, next) {
                       allComments.push( friendPlusMoods[i]['mood']['comments'][j] );
                     }
                   }
-                  console.log(allComments[2]);
+                  //console.log(allComments[2]);
                   res.render('moodfeed', {
                     allComments:allComments,
                     user : req.decoded._doc.username,
