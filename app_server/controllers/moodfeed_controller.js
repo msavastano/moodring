@@ -13,48 +13,34 @@ module.exports.get_mood_feed = function(req, res, next) {
   var friends;
   var friendPlusMoods = [];
   var allComments = [];
-  var fids = [];
-  var ms = []
+  var allMoodsCount = 0;
+  var allMoodsCounter = 0;
   User.findById(req['decoded']['_doc']['_id'])
     .populate('friends')
     .exec(function(err, user){
       if(user.friends.length == 0){
         res.redirect('/searchfriends');
       }
-      user.friends.forEach(function(f, fi){
-        User.findById(f._id)
+      for(uf = 0; uf < user.friends.length; uf++){
+        User.findById(user.friends[uf]._id)
           .populate('moods')
           .exec(function(err, f){
-
-            f.moods.forEach(function(mo,i){
-              console.log(f.username);
-              console.log(i);
-
-              Moods.findById(mo._id)
+            allMoodsCount = allMoodsCount + (f.moods.length);
+            for(fm = 0; fm < f.moods.length; fm++){
+              Moods.findById(f.moods[fm]._id)
               .populate('comments.postedBy')
               .populate('comments.commentsOnComments.postedBy')
               .exec(function(err, m){
+                allMoodsCounter++;
                 if(m.comments.length > 0){
                   var friendPlusMood = {};
                   friendPlusMood['friend'] = f;
                   friendPlusMood['mood'] = m;
                   friendPlusMoods.push(friendPlusMood);
                 }
-
-                if(fids.indexOf(f._id) == -1){
-                  fids.push(f._id);
-                  ms = []
-                }
-                if(ms.indexOf(m._id)){
-                  ms.push(m._id);
-                }
-
-                console.log("fids.length "+fids.length);
-                console.log("user.friends.length "+user.friends.length);
-                console.log("ms.length "+ ms.length);
-                console.log("f.moods.length "+f.moods.length);
-                //if(fids.length == user.friends.length && (i+1) == f.moods.length){
-                if(fids.length == user.friends.length && ms.length == f.moods.length){
+                console.log("allMoodsCount "+allMoodsCount);
+                console.log("allMoodsCounter "+allMoodsCounter);
+                if(allMoodsCounter == allMoodsCount){
                   console.log("****************RENDERED****************");
                   for (i = 0; i < friendPlusMoods.length; i++) {
                     for (j = 0; j < friendPlusMoods[i]['mood']['comments'].length; j++) {
@@ -64,7 +50,6 @@ module.exports.get_mood_feed = function(req, res, next) {
                       allComments.push( friendPlusMoods[i]['mood']['comments'][j] );
                     }
                   }
-                  //console.log(allComments[2]);
                   res.render('moodfeed', {
                     allComments:allComments,
                     user : req.decoded._doc.username,
@@ -73,20 +58,21 @@ module.exports.get_mood_feed = function(req, res, next) {
                   });
                 }
             });
-            });
+           }
           });
-        });
+         }
       });
 };
 
-/*  f.moods = f.moods.sort(function(a,b){
-    if (a.postedBy < b.postedBy) {
+/*
+ f.moods.sort(function(a,b){
+    if (a.ownerid < b.ownerid) {
       return -1;
     }
-    if (a.postedBy > b.postedBy) {
+    if (a.ownerid > b.ownerid) {
       return 1;
     }
     // a must be equal to b
     return 0;
-  });
+ });
 */
