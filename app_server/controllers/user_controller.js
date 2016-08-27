@@ -122,22 +122,30 @@ module.exports.forgot = function(req, res, next) {
 module.exports.register_user = function(req, res, next){
   //console.log("register_user");
   //console.log(req.body);
-  var e = '';
+  var usererr = '';
+  var errorname = '';
+  var emailerr = '';
+  var erroremail = '';
   if(req.body.passwordverify == req.body.password){
     User.register(new User({ username : req.body.username, email : req.body.email}),
           req.body.password, function(err, user) {
             if (err) {
               if(err['name'] == 'UserExistsError'){
-                e = 'User already exists'
+                usererr = 'User already exists';
+                errorname = req.body.username;
               }
               if(err['errors'] && err['errors']['email']){
-                e = 'Email address already in use'
+                emailerr = 'Email address already in use';
+                erroremail = req.body.email;
               }
               console.log(err);
               res.render('register', { title: 'New Registration',
-                                        errormessage: e,
+                                        usererrormessage: usererr,
+                                        emailerrormessage:emailerr,
                                         passwordError: '',
-                                        message: 'Welcome to'
+                                        message: 'Welcome to',
+                                        errorname:errorname,
+                                        erroremail:erroremail
                                        });
             }else{
               if(req.body.firstname) {
