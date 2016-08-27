@@ -120,15 +120,24 @@ module.exports.forgot = function(req, res, next) {
 
 // save user to DB
 module.exports.register_user = function(req, res, next){
-  console.log("register_user");
-  console.log(req.body);
+  //console.log("register_user");
+  //console.log(req.body);
+  var e = '';
   if(req.body.passwordverify == req.body.password){
     User.register(new User({ username : req.body.username, email : req.body.email}),
           req.body.password, function(err, user) {
             if (err) {
-                res.render('register', { title: 'New Registration',
-                                      passwordError: err,
-                                         message: 'Welcome to'
+              if(err['name'] == 'UserExistsError'){
+                e = 'User already exists'
+              }
+              if(err['errors'] && err['errors']['email']){
+                e = 'Email address already in use'
+              }
+              console.log(err);
+              res.render('register', { title: 'New Registration',
+                                        errormessage: e,
+                                        passwordError: '',
+                                        message: 'Welcome to'
                                        });
             }else{
               if(req.body.firstname) {
@@ -155,7 +164,7 @@ module.exports.register_user = function(req, res, next){
       });
   }else{
     res.render('register', { title: 'New Registration',
-                          passwordError: 'passwords do not match',
+                          passwordError: 'Passwords do not match',
                              message: 'Welcome to'
                            });
   }
@@ -196,7 +205,7 @@ module.exports.logout =  function(req, res) {
 module.exports.login_page = function(req, res, next){
   console.log("login_page");
   res.render('login', { title: 'Login',
-                        message: 'Welcome',
+                        message: '',
                         nouser:req.decoded
                       });
 };

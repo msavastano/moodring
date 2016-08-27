@@ -5,7 +5,8 @@ block content
   h3 This is a demo.  Use fake data!
   p #{title} for moodRing account<!--Registration Form-->
   input(type="hidden", value=nouser, id="nu")
-  
+  p.errormessage= errormessage
+  p.errormessage= passwordError
   .row
     .col-xs-12.col-md-6
       form.form-horizontal(action="", method="post", role="form", id="newUser")
@@ -25,7 +26,6 @@ block content
           label.col-sm-2.control-label(for="passwordverify") Verify Password
           .col-sm-10
             input.form-control(name="passwordverify", rows="5", type="password")  
-            br
-            = passwordError
+            br            
         button.btn.btn-default.pull-right Submit
     .col-xs-12.col-md-4
