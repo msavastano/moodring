@@ -10,6 +10,7 @@ var ctrlCommentOnComment = require('../controllers/comment_on_comment_controller
 var ctrlMoodFeed = require('../controllers/moodfeed_controller')
 var upload = multer({ dest: './uploads' });
 var stringify = require('json-stringify-safe');
+var ctrlProfile = require('../controllers/profile_controller');
 
 //router.post('/image', upload.single('avatar'), function(req, res, next) {
   //console.log("REQ FILES = "+req.file.path);
@@ -55,5 +56,8 @@ router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComme
 router.post('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 /*Get Mood Feed*/
 router.get('/moodfeed', Verify.verifyOrdinaryUser, ctrlMoodFeed.get_mood_feed);
+
+router.get('/profile', Verify.verifyOrdinaryUser, ctrlProfile.get_profile);
+
 
 module.exports = router;
