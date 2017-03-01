@@ -2,7 +2,8 @@ extends layout
 
 block content
   div.container-fluid
-    h1.header-font Welcome Back, #{user}!    
+    h1.header-font Welcome Back, #{user}!  
+        a(href="/profile") (profile)
     input(type="hidden", value=nouser, id="nu")  
   
     div.container-fluid

@@ -26,6 +26,14 @@ var User = new Schema({
       type: String,
       'default': ''
     },
+    location: {
+      type: String,
+      'default': ''
+    },
+    gender: {
+      type: String,
+      'default': ''
+    },
     email: {
       type: String,
       index: true,

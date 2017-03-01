@@ -56,8 +56,10 @@ router.post('/:moodid/comment/:userid/new', Verify.verifyOrdinaryUser, ctrlComme
 router.post('/:moodid/comment/:commentid/commentoncomment/:userid/new', Verify.verifyOrdinaryUser, ctrlCommentOnComment.new_comment_on_comment);
 /*Get Mood Feed*/
 router.get('/moodfeed', Verify.verifyOrdinaryUser, ctrlMoodFeed.get_mood_feed);
-
+/*Get logged in user profile*/
 router.get('/profile', Verify.verifyOrdinaryUser, ctrlProfile.get_profile);
+/*Edit profile values*/
+router.post('/profile', Verify.verifyOrdinaryUser, ctrlProfile.edit_profile);
 
 
 module.exports = router;

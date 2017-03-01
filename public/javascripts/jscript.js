@@ -34,6 +34,10 @@ $( document ).ready(function() {
       $('#addComment').submit();
     });
 
+    $('#edit_profile').click(function(){
+      $('#profile').submit();      
+    });
+
     $('#submitcommcomm').click(function(){
       $('#addCommentComment').submit();
     });

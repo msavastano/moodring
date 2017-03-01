@@ -16,7 +16,32 @@ var crypto = require('crypto');
 
 
 module.exports.get_profile = function(req, res, next) {
-  res.render('profile', {
-        title: 'Profile Page'
+  User.findById(req['decoded']['_doc']['_id'], function(err, user){
+    res.render('profile', {
+          title: 'Demographics',
+          nouser:req.decoded,
+          user: user,
+          saved : false
+    });
   });
+}
+
+module.exports.edit_profile = function(req, res, next) {
+  console.log("IN PROFILE PUT");
+  console.log(req.body);
+  User.findByIdAndUpdate(req['decoded']['_doc']['_id'], {
+       $set: req.body
+   }, {
+       new: true
+   }, function (err, user) {
+       if (err) throw err;
+       //res.json(user);
+       //res.redirect('/profile');
+       res.render('profile', {
+             title: 'Demographics',
+             nouser:req.decoded,
+             user: user,
+             saved : true
+       });
+   });
 }

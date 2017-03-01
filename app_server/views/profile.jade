@@ -1,5 +1,45 @@
 extends layout
 
 block content
-
-  p #{title}
+  div.container-fluid
+    h1.header-font #{user.username}'s #{title}     
+     - var h = "hidden"; if(saved){h = "visible"}     
+     span(style="visibility:"+h+";color:red", id="savedspan") saved
+     
+    input(type="hidden", value=nouser, id="nu")
+    .row
+     .col-xs-12.col-md-6
+       form.form-horizontal(action="", method="post", role="form", id="profile")
+         .form-group
+           label.col-sm-2.control-label(for="username") Username
+           .col-sm-10
+             input#review.form-control(name="username", rows="5", value=user.username) 
+         .form-group
+           label.col-sm-2.control-label(for="firstname") First Name
+           .col-sm-10
+             input#review.form-control(name="firstname", rows="5", value=user.firstname) 
+         .form-group
+           label.col-sm-2.control-label(for="lastname") Last Name
+           .col-sm-10
+             input#review.form-control(name="lastname", rows="5", value=user.lastname)  
+         .form-group  
+           .input-prepend.input-append 
+           label.col-sm-2.control-label(for="gender") Gender
+           .col-sm-10            
+             select(name="gender", id="gender", style="width: 125px").form-control
+               - var select=null; if (user.gender == "n/a") select='selected';
+               option(value="n/a", selected=select) n/a
+               - var select=null; if (user.gender == "female") select='selected';
+               option(value="female",selected=select) female
+               - var select=null; if (user.gender == "male") select='selected';
+               option(value="male",selected=select)  male  
+         .form-group
+           label.col-sm-2.control-label(for="location") Location
+           .col-sm-10
+             input#review.form-control(name="location", rows="5", value=user.location)  
+         .form-group
+           label.col-sm-2.control-label(for="email") Email Address
+           .col-sm-10
+             input#review.form-control(name="email", rows="5", value=user.email)            
+         button#edit_profile.btn.btn-default.pull-right Submit        
+     .col-xs-12.col-md-4
