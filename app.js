@@ -11,7 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var cloudinary = require('cloudinary');
 var flash = require('express-flash');
 var session = require('express-session')
-var methodOverride = require('method-override')
+
 
 
 require('./app_server/models/db');
@@ -32,7 +32,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(methodOverride('_method'));
+
 
 // passport config
 var Users = require('./app_server/models/users');
