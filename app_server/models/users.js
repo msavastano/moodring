@@ -26,6 +26,14 @@ var User = new Schema({
       type: String,
       'default': ''
     },
+    bio: {
+      type: String,
+      'default': ''
+    },
+    website: {
+      type: String,
+      'default': ''
+    },
     location: {
       type: String,
       'default': ''
